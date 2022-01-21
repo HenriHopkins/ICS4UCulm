@@ -1,14 +1,11 @@
-
 package culmmenu;
-
 import java.io.*;
 import java.util.StringTokenizer;
 import java.util.Scanner;
-public class CulmMenu {
+public class Culmmenu {
 
-   
-    public static void main(String[] args) throws FileNotFoundException, IOException{
-int selected =0;
+    public static void main(String[] args)throws FileNotFoundException, IOException {
+        int selected =0;
         System.out.println("Menu: (Enter the number of the option you wish to select)");
 System.out.println("1. Gamemodes");
 System.out.println("2. Settings");
@@ -23,7 +20,7 @@ if (selected==1) {gamemodes();}
 if (selected==2) {selected();}
 if (selected==3) {start();}
 if (selected==4) {doHighScore();}
-if (selected==5) {}
+if (selected==5) {infoMenu();}
 if (selected==6) {}
 
  }
@@ -72,6 +69,29 @@ System.out.println("2. Adjust number of players");
  }
  br.close();
     }
+    public static void infoMenu() throws FileNotFoundException, IOException {
+        int select=0;
+        Scanner input = new Scanner(System.in);
+        System.out.println("Welcome to the Info Menu");
+        System.out.println("1. How to start.");
+        System.out.println("2. How to change settings.");
+        System.out.println("3. How to play.");
+        System.out.println("4. Highscores.");
+        System.out.println("5. Exiting the game.");
+        select = input.nextInt();
+if (select==1) {System.out.println("- First, select the gamemode you wish to play in the \"Gamemodes\" tab. 1 player or 2 players. ");
+                System.out.println("- Then, to start the game select the \"Start Game\" tab.  ");}
+if (select==2) {
+                System.out.println("- You can adjust your prefered options the in the \"Settings\" tab. Here you can change your player initals, the timer, highscores, and bonus point options.");}
+if (select==3) {System.out.println("-Depending on the amount of players you will take turns answering trivia questions once they appear on the screen.");
+                System.out.println("-Either type the short answer, or insert a letter for the multiple choice questions. But be carful before the time runs out!");
+                System.out.println("-Points will be rewarded for correct answers, and how quickly you can answer.");
+                System.out.println("-The player with the most points at the end of the game wins!");}
+if (select==4) {
+                System.out.println("-After each game highscores will be recorded in the \"Highscores\" tab.");
+                System.out.println("-You can delete records in the \"Settings\" tab.");}
+if (select==5) {
+                System.out.println("-To exit the game select the \"Exit\" tab.");}
 }
 /*Question
 Letter option
@@ -79,6 +99,6 @@ Letter option
 Letter option
 Letter option
 Answer ans
-
 Questions
 Answer ans*/
+    }
