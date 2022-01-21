@@ -69,10 +69,10 @@ System.out.println("2. Adjust number of players");
  }
  br.close();
     }
-    public static void infoMenu() throws FileNotFoundException, IOException {
-        int select=0;
+    public static void infoMenu() {
+        int select;
         Scanner input = new Scanner(System.in);
-        System.out.println("Welcome to the Info Menu");
+        System.out.println("Welcome to the Info Menu (enter 6 to exit)");
         System.out.println("1. How to start.");
         System.out.println("2. How to change settings.");
         System.out.println("3. How to play.");
@@ -99,6 +99,7 @@ if (select==4) {
 if (select==5) {
                 System.out.println("Exiting the game:");
                 System.out.println("-To exit the game select the \"Exit\" tab.");}
+        if (select!=6) {infoMenu(); select=0;}
 }
     
 /*Question
