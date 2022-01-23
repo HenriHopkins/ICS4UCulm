@@ -1,6 +1,5 @@
 Sunday:
 -learn timer class from YouTube video(Henri)
--implement recursion in main menu (Henri)
 -develop asking questions class along with score tracker and bonuses for answering quickly utilizing recursion (Henri + Court?)
 -develop scoring system (Court)
 -Thereby create array list for players score
