@@ -5,25 +5,34 @@ import java.util.Scanner;
 public class Culmmenu {
 
     public static void main(String[] args)throws FileNotFoundException, IOException {
-        int selected =0;
+     menu(); 
+    }
+    
+    public static void menu() {
+    int selected =0;
         System.out.println("Menu: (Enter the number of the option you wish to select)");
 System.out.println("1. Gamemodes");
 System.out.println("2. Settings");
 System.out.println("3. Start Game");
 System.out.println("4. Display high scores");
-System.out.println("5. Exit");
-System.out.println("6. Info");
+System.out.println("5. Info");
+System.out.println("6. Exit");
 Scanner input = new Scanner(System.in);
 //note to self: write thing to prevent invalid input
 selected = input.nextInt();
+if (selected!=6) {
 if (selected==1) {gamemodes();}
 if (selected==2) {selected();}
 if (selected==3) {start();}
 if (selected==4) {doHighScore();}
 if (selected==5) {infoMenu();}
-if (selected==6) {}
+    menu();
+}
+else {System.out.println("Exited.");}
+    }
+    
 
- }
+ 
     
     public static void gamemodes() {
         int pick,pick2,pick3 = 0;
