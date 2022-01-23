@@ -22,7 +22,7 @@ ans  = input.nextLine();
 //if timer>time limit decided by court, timer.cancel(); timer.purge(); do recursion
 //maybe implement while loop with c condition to prevent infinite loop and whatnot
 if (ans==answers.get(num)) {System.out.println("correct!") scoreArr.get(0)++;};
-    else {System.out.println("Incorrect!"); }//integrate recursion here
+    else {System.out.println("Incorrect!"); } if (endCondition = false) {playGame(c);}
 }
  
 if (players>1) { //couldnt this just be an else lol
@@ -43,7 +43,8 @@ ans  = input.nextLine();
 //if timer>time limit decided by court, timer.cancel(); timer.purge(); do recursion
 //maybe implement while loop with c condition to prevent infinite loop and whatnot
 if (ans==answers.get(num)) {System.out.println("correct!") scoreArr.get(c)++;};
-    else {System.out.println("Incorrect!"); }//integrate recursion here
+    else {System.out.println("Incorrect!"); } if (endCondition = false) {playGame(c);}
 	    }
 	}
 }
+//obviously endCondition is defunct atm
