@@ -9,6 +9,7 @@ Sunday:
 Monday:
 -address player/team modes
 -integrate seperate classes
+-ensure classes integrate properly/adjust them to do so because currently you can't run the menu before reader and vice verse, so will probably have to make more classes
 
 Tuesday:
 -debugging
