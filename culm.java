@@ -1,5 +1,6 @@
 public class culm {
     public static void main(String[] args) {
-      System.out.println("hi court");
+   CulmReader reader = new CulmReader();
+        CulmMneu mainmenu = new CulmMenu();
     }
 }
