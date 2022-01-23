@@ -1,0 +1,22 @@
+Sunday:
+-learn timer class from YouTube video(Henri)
+-implement recursion in main menu (Henri)
+-develop asking questions class along with score tracker and bonuses for answering quickly utilizing recursion (Henri + Court?)
+-develop scoring system (Court)
+-Thereby create array list for players score
+-implenent file writing method to record high scores
+-decide how long games should be and how length should be measured, like if it should be a time limit or score limit or both (Court)
+
+Monday:
+-address player/team modes
+-integrate seperate classes
+
+Tuesday:
+-debugging
+-look to improve overall effiency/extra work we can do
+
+Wednesday:
+-Henri does last checks of project and submits before midnight
+
+Thursday:
+-We present to Brunetti in person (?)
