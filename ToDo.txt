@@ -20,3 +20,23 @@ Wednesday:
 
 Thursday:
 -We present to Brunetti in person (?)
+
+
+Project outline:
+  -starts:
+  -menu
+
+
+  if (menu!=start) do internal thing
+
+  if (menu=start)
+
+  import variables here
+
+  use these variables to determine how the game is played
+
+  use that to set variables appropriately and then file read correctly 
+
+  then play game until ____
+
+  then do menu again until exit is hit
