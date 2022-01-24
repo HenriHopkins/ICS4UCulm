@@ -4,15 +4,6 @@ public class Main //"main" will be changed upon integration
 {
 	public static void main(String[] args) {
 	int c = 0;
-		
-		//request initals
-	String initals1="";
-        String initals2="";
-        
-        System.out.println("Player 1 Enter Intials: ");
-        initals1 = input.nextLine();
-        System.out.println("Player 2 Enter Intials: ");
-        initals2 = input.nextLine();
 
 	playGame(c);
 	}
