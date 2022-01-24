@@ -1,14 +1,9 @@
-Sunday:
--learn timer class from YouTube video(Henri)
--bonuses for answering quickly(Henri + Court?)
--develop scoring system (Court)
--implenent file writing method to record high scores
--decide how long games should be and how length should be measured, like if it should be a time limit or score limit or both (Court)
-
 Monday:
 -address player/team modes
+-integrate timer class
 -integrate seperate classes
--ensure classes integrate properly/adjust them to do so because currently you can't run the menu before reader and vice verse, so will probably have to make more classes
+-ensure classes integrate properly/adjust them to do so because currently you can't run the menu before reader and vice versa, so will probably have to make more classes
+-fully implement file writing method to record high scores
 
 Tuesday:
 -protect against incorrect input (prevent incorrect inputs from crashing the program)
