@@ -49,6 +49,11 @@ if (ans==answers.get(num)) {System.out.println("correct!") scoreArr.get(c)+=poin
 		    if (scoreArr.get(hi)<50) {playGame(c);}
 		    else {System.out.println("Player "+hi+1+" wins!");}
 	    }
+	  checkHighScore();
 	}
+	  public static void checkHighScore();
+	  //do buffered reader to load top (?, ask court) high scores
+	  //sort array list and see if it is bigger than last one, if it is check again and again until yk, then write it there?
+	  //else nothing happens
 }
 //obviously endCondition is defunct atm
