@@ -24,6 +24,7 @@ public class culmMenu {
 
     public static void menu(int gamemode1,ArrayList<Integer>playerScore) throws IOException {
         int selected = 0;
+        System.out.println("---------------------------------------------------------");
         System.out.println("Menu: (Enter the number of the option you wish to select)");
         System.out.println("1. Gamemodes");
         System.out.println("2. Settings");
@@ -62,11 +63,13 @@ public class culmMenu {
         int teamPlayers;
         
         Scanner input = new Scanner(System.in);
+        System.out.println("---------------------------------------------------------");
         System.out.println("1. Adjust mix of questions about teams and/or players");
         System.out.println("2. Adjust type of questions");
         System.out.println("3. Back to menu");
         pick = input.nextInt();
         if (pick == 1) {
+            System.out.println("---------------------------------------------------------");
             System.out.println("1. Questions about players only");
             System.out.println("2. Questions about teams only");
             System.out.println("3. Randomized mix of both");
@@ -83,6 +86,7 @@ public class culmMenu {
             //note that teamPlayers should be imported
         }
         if (pick == 2) {
+            System.out.println("---------------------------------------------------------");
             System.out.println("1. Multiple choice questions only");
             System.out.println("2. Direct answer questions only");
             System.out.println("3. Randomized mix of both");
@@ -110,6 +114,7 @@ public class culmMenu {
     public static void settings(ArrayList<Integer> playerScore, int gamemode1) throws IOException {
         int selected = 0;
         Scanner input = new Scanner(System.in);
+        System.out.println("---------------------------------------------------------");
         System.out.println("1. Adjust time limit (or remove it)");
         System.out.println("2. Adjust number of players");
                 System.out.println("3. Back to menu");
@@ -118,6 +123,7 @@ public class culmMenu {
         if (selected==1) {}//code here to adjust timer somehow
         if (selected==2) {System.out.println("Current number of players is: "+playerScore.size());
 int selected1=0;
+System.out.println("---------------------------------------------------------");
         System.out.println("1. Remove players");
 System.out.println("2. Add players");
 selected1=input.nextInt();
@@ -161,6 +167,7 @@ for (int c=size; c<size+i; c++) {
     public static void infoMenu(int gamemode1, ArrayList<Integer> playerScore) throws IOException {
         int select;
         Scanner input = new Scanner(System.in);
+        System.out.println("---------------------------------------------------------");
         System.out.println("Welcome to the Info Menu");
         System.out.println("1. How to start.");
         System.out.println("2. How to change settings.");
@@ -171,15 +178,18 @@ for (int c=size; c<size+i; c++) {
 
         select = input.nextInt();
         if (select == 1) {
+            System.out.println("---------------------------------------------------------");
             System.out.println("How to start:");
             System.out.println("- First, select the gamemode you wish to play in the \"Gamemodes\" tab. 1 player or 2 players. ");
             System.out.println("- Then, to start the game select the \"Start Game\" tab.  ");
         }
         if (select == 2) {
+            System.out.println("---------------------------------------------------------");
             System.out.println("How to change settings:");
             System.out.println("- You can adjust your prefered options the in the \"Settings\" tab. Here you can change your player initals, the timer, highscores, and bonus point options.");
         }
         if (select == 3) {
+            System.out.println("---------------------------------------------------------");
             System.out.println("How to play:");
             System.out.println("-Depending on the amount of players you will take turns answering trivia questions once they appear on the screen.");
             System.out.println("-Either type the short answer, or insert a letter for the multiple choice questions. But be carful before the time runs out!");
@@ -187,11 +197,13 @@ for (int c=size; c<size+i; c++) {
             System.out.println("-The player with the most points at the end of the game wins!");
         }
         if (select == 4) {
+            System.out.println("---------------------------------------------------------");
             System.out.println("Highscores:");
             System.out.println("-After each game highscores will be recorded in the \"Highscores\" tab.");
             System.out.println("-You can delete records in the \"Settings\" tab.");
         }
         if (select == 5) {
+            System.out.println("---------------------------------------------------------");
             System.out.println("Exiting the game:");
             System.out.println("-To exit the game select the \"Exit\" tab.");
         }
