@@ -4,6 +4,7 @@ Monday:
 -integrate seperate classes
 -ensure classes integrate properly/adjust them to do so because currently you can't run the menu before reader and vice versa, so will probably have to make more classes
 -fully implement file writing method to record high scores
+-implement back buttons in psuedo-sub-methods (possibly by dividing them up into real sub-methods)
 
 Tuesday:
 -protect against incorrect input (prevent incorrect inputs from crashing the program)
