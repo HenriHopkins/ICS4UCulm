@@ -19,10 +19,10 @@ System.out.println(q.get(num));
 System.out.println(op.get(num));
 //timer.start();
 ans  = input.nextLine();
-//if timer>time limit decided by court, timer.cancel(); timer.purge(); do recursion
+//if timer>time limit decided by court,points = 10-counter, timer.cancel(); timer.purge(); do recursion
 //maybe implement while loop with c condition to prevent infinite loop and whatnot
-if (ans==answers.get(num)) {System.out.println("correct!") scoreArr.get(0)++;};
-    else {System.out.println("Incorrect!"); } if (endCondition = false) {playGame(c);}
+if (ans==answers.get(num)) {System.out.println("correct!") scoreArr.get(0)+=points;};
+    else {System.out.println("Incorrect!"); } if (scoreArr.get(0)<50) {playGame(c);}
 }
  
 if (players>1) { //couldnt this just be an else lol
@@ -40,10 +40,14 @@ System.out.println(q.get(num));
 System.out.println(op.get(num));
 //timer.start();
 ans  = input.nextLine();
-//if timer>time limit decided by court, timer.cancel(); timer.purge(); do recursion
+//if timer>time limit decided by court, points = 10-counter, timer.cancel(); timer.purge(); do recursion
 //maybe implement while loop with c condition to prevent infinite loop and whatnot
-if (ans==answers.get(num)) {System.out.println("correct!") scoreArr.get(c)++;};
-    else {System.out.println("Incorrect!"); } if (endCondition = false) {playGame(c);}
+if (ans==answers.get(num)) {System.out.println("correct!") scoreArr.get(c)+=points;};
+    else {System.out.println("Incorrect!"); } 
+		    int hi = 0;
+		    for (int i = scoreArr) {if (scoreArr.get(i)>scoreArr.get(hi)) {hi=i;}}
+		    if (scoreArr.get(hi)<50) {playGame(c);}
+		    else {System.out.println("Player "+hi+1+" wins!");}
 	    }
 	}
 }
