@@ -11,6 +11,7 @@ Monday:
 -ensure classes integrate properly/adjust them to do so because currently you can't run the menu before reader and vice verse, so will probably have to make more classes
 
 Tuesday:
+-protect against incorrect input (prevent incorrect inputs from crashing the program)
 -debugging
 -look to improve overall effiency/extra work we can do
 -if we're really ahead of schedule, GUI
