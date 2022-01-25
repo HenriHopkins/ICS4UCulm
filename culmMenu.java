@@ -10,7 +10,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Random;
 public class culmMenu {
-
+public static int gamemode2;
     public static void main(String[] args) throws FileNotFoundException, IOException {
         //set defaults here
         int gamemode1 = 0;
@@ -21,6 +21,7 @@ public class culmMenu {
 
     public static void menu(int gamemode1,ArrayList<Integer>playerScore) throws IOException {
         int selected = 0;
+        System.out.println("gamemode1 is: "+gamemode1);
         System.out.println("Menu: (Enter the number of the option you wish to select)");
         System.out.println("1. Gamemodes");
         System.out.println("2. Settings");
@@ -29,7 +30,7 @@ public class culmMenu {
         System.out.println("5. Info");
         System.out.println("6. Exit");
         Scanner input = new Scanner(System.in);
-//note to self: write thing to prevent invalid input
+//note to henri: write thing to prevent invalid input
         selected = input.nextInt();
         if (selected != 6) {
             if (selected == 1) {
@@ -39,7 +40,7 @@ public class culmMenu {
                 settings(playerScore,gamemode1);
             }
             if (selected == 3) {
-                System.out.println("acessing"); start(gamemode1,playerScore);
+               start(gamemode1,playerScore);
             }
             if (selected == 4) {
                 doHighScore();
@@ -56,8 +57,8 @@ public class culmMenu {
 
     public static void gamemodes(int gamemode1, ArrayList<Integer> playerScore) throws IOException {
         int pick, pick2, pick3 = 0;
-        int teamPlayers;
-
+        int teamPlayers; //rn this is a defunct variable but if we decide to implement the team/player feature we'll use it
+//note that if we were to use it i'd to have to set it as a default like I did with gamemode1
         Scanner input = new Scanner(System.in);
         System.out.println("1. Adjust mix of questions about teams and/or players");
         System.out.println("2. Adjust type of questions");
@@ -77,25 +78,25 @@ public class culmMenu {
             if (pick2 == 3) {
                 teamPlayers = 2;
             }
-            //note that teamPlayers should be imported
         }
         if (pick == 2) {
             System.out.println("1. Multiple choice questions only");
             System.out.println("2. Direct answer questions only");
             System.out.println("3. Randomized mix of both");
             pick3 = input.nextInt();
-//obviously the gamemode variable from the reader will have to be integrated somehow
+//ignore these comments, they're for if we need to import a class
             //  import culmmenu.CulmReader;
             // CulmReader cr = new CulmReader();
             //cr.wordOnly();
             if (pick3 == 1) {
-                gamemode1 = 1;
+       gamemode1 = 1; menu(gamemode1,playerScore);
+
             }
             if (pick3 == 2) {
-                gamemode1 = 2;
+                gamemode1 = 0; menu(gamemode1,playerScore);
             }
             if (pick3 == 3) {
-                gamemode1 = 3;
+                gamemode1 = 2; menu(gamemode1,playerScore);
             }
         }
 
@@ -140,12 +141,13 @@ public class culmMenu {
 
 
     public static void start(int gamemode1, ArrayList<Integer> playerScore) throws IOException {
-        //somehow integrate reader into this and then do an action depending on the value of the gamemode or something
-        System.out.println("acessing 2");  culmReader(gamemode1,playerScore);
-        // if () {}
-    }//if this works, you could make it shorter as you could just call culmReader() in the main menu
+
+ culmReader(gamemode1,playerScore);
+
+    }//if this works (which it does atm), we probs could make it shorter as you could just call culmReader() in the main menu
 
     public static void doHighScore() throws FileNotFoundException, IOException {
+        //code that displays highscores, we still need one that records it either in a connected method to playGame, or playGame itself
         BufferedReader br = new BufferedReader(new FileReader("highscores.txt"));
         String Line;
 
@@ -202,35 +204,32 @@ public class culmMenu {
         // import culmmenu.Culmmenu;
         // Culmmenu cr = new Culmmenu();
         //cr.gamemodes();
-        System.out.println("acessing 3");
+        //ignore^
         int c =0;
 int co=0;
+
         //questions, options, and answers stored in array lists
         ArrayList<String> q = new ArrayList();
         ArrayList<String> op = new ArrayList();
         ArrayList<String> ans = new ArrayList();
 
-//gamemode 0 is word answering only, this would not be an integer in final edition
-//gamemode 1 is options only
-//gamemode 2 is both
-        //  int gamemode = cr.gamemodes().gamemode1;
+
+        //  ignore: int gamemode = cr.gamemodes().gamemode1;
         int gamemode = gamemode1;
-        if (gamemode==0) {wordOnly(q,op,ans);}
+        if (gamemode==0) { wordOnly(q,op,ans);}
         if (gamemode==1) {optionOnly(q,op,ans);}
         if (gamemode==2) {both(q,op,ans);}
         playGame(c,q,op,ans,playerScore,co);
     }
 
     public static void wordOnly(ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans) throws FileNotFoundException, IOException {
-        //int co=0;
-        //this version adds blank thing to option arraylist to keep acessing in order, may be changed
+        //this version adds blank thing to option arraylist to keep acessing in order
         int temp = 0;
-        System.out.println("acessing 4");
         BufferedReader br= new BufferedReader(new FileReader("qs.txt"));
         String Line;
-
+//i changed the questions file so that the word questions and multi-choice questions are seperated by "WORDONLY" to make this easier
         while((Line=br.readLine())!=null){
-if (Line.contains("WORDONLY")) {temp = 1; System.out.println("acessed");}
+if (Line.contains("WORDONLY")) {temp = 1; }
 else if (temp==1) {
 if(Line.contains("answer")) {ans.add(Line.substring(Line.indexOf("answer")+7));op.add("");}
 //change this if questions are longer than a line
@@ -240,77 +239,86 @@ if(Line.contains("answer")) {ans.add(Line.substring(Line.indexOf("answer")+7));o
 
     public static void optionOnly(ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans) throws FileNotFoundException, IOException {
         int c=0;
-
         String o="";
         BufferedReader br= new BufferedReader(new FileReader("qs.txt"));
         String Line;
 
         while((Line=br.readLine())!=null){
-//with OP i mark S as this is where I would split the options when displaying them later on, as this is better than integrating 4 options
+           if (!Line.contains("WORDONLY")) {
             c++;
             if (c==1) {q.add(Line);}
             else if (c==2){o+=Line;}
             else if (c==3){o+=Line;}
             else if (c==4){o+=Line;}
-            else if (c==5){o+=Line;op.add(o+"S");o="";}
-            else if (c==6/*may not be needed:*/&&Line.contains("answer")) {ans.add(Line.substring(Line.indexOf("answer")+1));c=0;}
-//change this if questions are longer than a line
-//may have to change c based on how reader reads empty spaces
+            else if (c==5){o+=Line;op.add(o);o="";}
+            else if (c==6/*may not be needed:*/&&Line.contains("answer")) {ans.add(Line.substring(Line.indexOf("answer")+7));c=0;} }
+           else{break;}
+//change this if questions are longer than a line (no questions are longer than a line rn so we good)
         }
         br.close();
     }
 
 
     public static void both(ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans) throws FileNotFoundException, IOException {
-        //this version adds blank thing to option arraylist to keep acessing in order, may be changed
-
+        //this version adds blank thing to option arraylist to keep accessing in order
+//does combination of both readers, this works bc of WORLDONLY separation
+        int c=0,temp=0;
+        String o="";
         BufferedReader br= new BufferedReader(new FileReader("qs.txt"));
         String Line;
-        int c=0;
-        String o="";
-        while((Line=br.readLine())!=null){
-            c++;
 
-            if (c==1) {q.add(Line);}
-            else if (c==2) {if(Line.contains("answer")) {ans.add(Line.substring(Line.indexOf("answer")+1));op.add("");c=0;}
-            else{o+=Line;}
-            } else if (c==3){o+=Line;}
-            else if (c==4){o+=Line;}
-            else if (c==5){o+=Line;op.add(o+"S");o="";}
-            else if (c==6/*may not be needed:*/&&Line.contains("answer")) {ans.add(Line.substring(Line.indexOf("answer")+1));c=0;}
+        while((Line=br.readLine())!=null){
+            if (!Line.contains("WORDONLY")&&temp!=1) {
+                c++;
+                if (c==1) {q.add(Line);}
+                else if (c==2){o+=Line;}
+                else if (c==3){o+=Line;}
+                else if (c==4){o+=Line;}
+                else if (c==5){o+=Line;op.add(o);o="";}
+                else if (c==6/*may not be needed:*/&&Line.contains("answer")) {ans.add(Line.substring(Line.indexOf("answer")+7));c=0;} }
+            else if (Line.contains("WORDONLY")){temp=1;} else if (temp==1) {if(Line.contains("answer")) {ans.add(Line.substring(Line.indexOf("answer")+7));op.add("");}
+            else{q.add(Line);}}
 //change this if questions are longer than a line
-            else{q.add(Line);} }
+        }
         br.close();
     }
 
 
     public static void playGame(int c,ArrayList<String> q,ArrayList<String> op,ArrayList<String> ans, ArrayList<Integer> playerScore,int co){
-        //this one is a definite WIP
-        System.out.println("acessing 5");
-        System.out.println("size: "+playerScore.size());
+        //this one is still a bit of a WIP, especially with the highScore and timer, plus multiplayer has not been tested as of yet
 
         int points = 1;
-int timer =1; //note delete this later
-        int players = playerScore.size(); //obviously integrate diff variable, players is placeholder
+int timer =1; //note delete this later, once timer is implemented
+        int players = playerScore.size();
         Scanner input = new Scanner(System.in);
-        //  int co = 0; //may use this for recursion but not sure yet
         if (players ==1) {
             String answer = "";
             Random r = new Random();
-            int num =r.nextInt(q.size())+1; //may have to adjust random based on looping
+            int num =r.nextInt(q.size()-1)+1; //may have to adjust random based on looping, so far so good, although it does repeat some things so I could change it if we need
             System.out.println(q.get(num));
-            System.out.println(op.get(num));
-//timer.start();
+            if (!op.get(num).isBlank()) {
+                String str = op.get(num);
+                String A = str.substring(0,str.indexOf("B."));
+                String B = str.substring(str.indexOf("B."),str.indexOf("C."));
+                String C = str.substring(str.indexOf("C."),str.indexOf("D."));
+                String D = str.substring(str.indexOf("D."));
+                System.out.println(A);
+                System.out.println(B);
+                System.out.println(C);
+                System.out.println(D);
+
+                   }
+//ignore the following comments, its just me thinking outloud timer.start();
             answer  = input.nextLine();
 //if timer>time limit decided by court,points = 10-counter, timer.cancel(); timer.purge(); do recursion
 //maybe implement while loop with c condition to prevent infinite loop and whatnot
-            if (answer.equalsIgnoreCase(ans.get(num))) {System.out.println("correct!"); //playerScore.get(0)+=points;
+            if (answer.equalsIgnoreCase(ans.get(num))) {System.out.println("correct!");
 
                 playerScore.set(0,points+playerScore.get(0));
-            }
-    else {System.out.println("Incorrect!"); System.out.println("The answer was: "+ans.get(num));}  if (timer<2) {System.out.println("points: "+playerScore.get(0)); playGame(c,q,op,ans,playerScore,co);}
+            } //due to a lack of timer, points are set to increase by 1 for each question you get right
+    else {System.out.println("Incorrect!"); System.out.println("The answer was: "+ans.get(num));}  if (timer<2) {System.out.println("Your score is: "+playerScore.get(0)); playGame(c,q,op,ans,playerScore,co);}
         }
-
+//the below section is kinda a big mess, and is unfinished
         if (players>1) { //couldnt this just be an else lol
             int player;  //is the player variable really necessary
             if (co==0) {player=c;}
@@ -322,24 +330,25 @@ int timer =1; //note delete this later
                 Random r = new Random();
                 int num =r.nextInt(q.size())+1; //may have to adjust random based on looping
                 System.out.println(q.get(num));
-                System.out.println(op.get(num)); //need to develop op
+            if (!op.get(num).isBlank()) {System.out.println(op.get(num));} //gotta develop this
 //timer.start();
                 answer  = input.nextLine();
 //if timer>time limit decided by court, points = 10-counter, timer.cancel(); timer.purge(); do recursion
 //maybe implement while loop with c condition to prevent infinite loop and whatnot
                 if (answer.equalsIgnoreCase(ans.get(num))) {System.out.println("correct!");
                     playerScore.set(c,points+playerScore.get(c));
-                  //  playerScore.get(c)+=points;
                 }
     else {System.out.println("Incorrect!"); System.out.println("The answer was: "+ans.get(num));} if (timer<2) {playGame(c,q,op,ans,playerScore,co);}
 
             }
-            // checkHighScore();
+
         }
-   // }
+    //once the game is stopped, call highScore method? checkHighScore();
     //public static void checkHighScore();
 
 }
+
+
 /*
       int hi = 0;
                 for (int i : playerScore) {if (playerScore.get(i)>playerScore.get(hi)) {hi=i;}}
