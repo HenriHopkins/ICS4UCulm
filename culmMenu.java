@@ -15,6 +15,7 @@ public class culmMenu {
         //set defaults here
         int gamemode1 = 0;
         ArrayList<Integer> playerScore = new ArrayList();
+        playerScore.add(0);
         menu(gamemode1,playerScore);
     }
 
@@ -223,15 +224,17 @@ int co=0;
     public static void wordOnly(ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans) throws FileNotFoundException, IOException {
         //int co=0;
         //this version adds blank thing to option arraylist to keep acessing in order, may be changed
+        int temp = 0;
         System.out.println("acessing 4");
         BufferedReader br= new BufferedReader(new FileReader("qs.txt"));
         String Line;
 
         while((Line=br.readLine())!=null){
-
-            if(Line.contains("answer")) {ans.add(Line.substring(Line.indexOf("answer")+1));op.add("");}
+if (Line.contains("WORDONLY")) {temp = 1; System.out.println("acessed");}
+else if (temp==1) {
+if(Line.contains("answer")) {ans.add(Line.substring(Line.indexOf("answer")+7));op.add("");}
 //change this if questions are longer than a line
-            else{q.add(Line);} }
+            else{q.add(Line);} }}
         br.close();
     }
 
@@ -284,11 +287,10 @@ int co=0;
     public static void playGame(int c,ArrayList<String> q,ArrayList<String> op,ArrayList<String> ans, ArrayList<Integer> playerScore,int co){
         //this one is a definite WIP
         System.out.println("acessing 5");
-        if (playerScore.size()==0) {playerScore.add(0);}
         System.out.println("size: "+playerScore.size());
 
-        int points = 0;
-int timer =2; //note delete this later
+        int points = 1;
+int timer =1; //note delete this later
         int players = playerScore.size(); //obviously integrate diff variable, players is placeholder
         Scanner input = new Scanner(System.in);
         //  int co = 0; //may use this for recursion but not sure yet
@@ -302,11 +304,11 @@ int timer =2; //note delete this later
             answer  = input.nextLine();
 //if timer>time limit decided by court,points = 10-counter, timer.cancel(); timer.purge(); do recursion
 //maybe implement while loop with c condition to prevent infinite loop and whatnot
-            if (answer.equals(ans.get(num))) {System.out.println("correct!"); //playerScore.get(0)+=points;
+            if (answer.equalsIgnoreCase(ans.get(num))) {System.out.println("correct!"); //playerScore.get(0)+=points;
 
                 playerScore.set(0,points+playerScore.get(0));
             }
-    else {System.out.println("Incorrect!"); } System.out.println("The answer was: "+ans.get(num)); if (timer<2) {playGame(c,q,op,ans,playerScore,co);}
+    else {System.out.println("Incorrect!"); System.out.println("The answer was: "+ans.get(num));}  if (timer<2) {System.out.println("points: "+playerScore.get(0)); playGame(c,q,op,ans,playerScore,co);}
         }
 
         if (players>1) { //couldnt this just be an else lol
@@ -325,7 +327,7 @@ int timer =2; //note delete this later
                 answer  = input.nextLine();
 //if timer>time limit decided by court, points = 10-counter, timer.cancel(); timer.purge(); do recursion
 //maybe implement while loop with c condition to prevent infinite loop and whatnot
-                if (answer==ans.get(num)) {System.out.println("correct!");
+                if (answer.equalsIgnoreCase(ans.get(num))) {System.out.println("correct!");
                     playerScore.set(c,points+playerScore.get(c));
                   //  playerScore.get(c)+=points;
                 }
