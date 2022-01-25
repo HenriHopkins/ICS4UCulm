@@ -1,24 +1,22 @@
-Monday:
+Tuesday:
+-protect against incorrect input (prevent incorrect inputs from crashing the program, henri has code for this from other projects)
+-look to improve overall effiency/extra work we can do
 -address player/team modes (possibly scrap that)
--integrate timer class
--integrate seperate classes
--ensure classes integrate properly/adjust them to do so because currently you can't run the menu before reader and vice versa, so will probably have to make more classes
+-figure out how to get timer class to loop correctly (need it to not loop at same time, might be possible with integration tho Henri will investigate this)
 -fully implement file writing method to record high scores
 -implement back buttons in psuedo-sub-methods (possibly by dividing them up into real sub-methods)
 
-Tuesday:
--protect against incorrect input (prevent incorrect inputs from crashing the program)
--back button
--debugging
--look to improve overall effiency/extra work we can do
--if we're really ahead of schedule, GUI
-
 Wednesday:
--Henri does last checks of project and submits before midnight
+-debugging (exit button after exiting info menu for instance)
+-Henri does last checks
+-if we're really ahead of schedule, GUI
 
 Thursday:
 -We present in person (?)
+-Court can check it over too and submit
 
+Friday:
+-virtual presentation?
 
 Project outline:
   -starts:
