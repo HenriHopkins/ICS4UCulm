@@ -1,3 +1,100 @@
+What team lost to the Los Angles Lakers in the 2000 finals?
+A.	Detroit Pistons
+B.	San Antonio Spurs
+C.	Indiana Pacers
+D.	Miami Heat
+answer C
+Which team won 3 straight NBA titles between 2000 and 2002?
+A.	San Antonio Spurs
+B.	Los Angles Lakers
+C.	Detriot Pistons
+D.	Chicago Bulls
+answer B
+Which team had 4 straight finals appearances between 2011 and 2014?
+A.	Los Angles Lakers
+B.	Miami Heat
+C.	Golden State Warriors
+D.	San Antonio Spurs
+answer B
+What year did the Toronto Raptors win their first title?
+A.	2015
+B.	2018
+C.	2019
+D.	2020
+answer C
+The Milwaukee Bucks beat the Phoenix Suns in how many games during the 2021 NBA finals?
+A.	4
+B.	5
+C.	6
+D.	7
+answer C
+What team did Brandon Ingram play for when he won the MIP award in 2020?
+A.	LA Lakers
+B.	New Orleans Pelicans
+C.	Charlotte Hornets
+D.	Portland Trailblazers
+answer B
+What team did James Harden get traded to from the OKC?
+A.  Brookyln Nets
+B.  Washinton Wizards
+C.  San Antonio Spurs
+D.  Huston Rockets
+answer D
+Which team drafted Lebron James?
+A.  Miami Heat
+B.  Los Angles Lakers
+C.  Clevland Cavaliers
+D.  Toronto Raptors
+answer C
+Which team drafted Kyle Lowry?
+A.  Huston Rockets
+B.  Memphis Grizzlies
+C.  Toronto Raptors
+D.  Miami Heat
+answer B
+What team drafted Kawhi Leonard?
+A.  Toronto Raptors
+B.  Los Angles Clippers
+C.  San Antonio Spurs
+D.  Boston Celtics
+answer C
+Which team drafted Kobe Bryant?
+A.  Los Angles Lakers
+B.  Orlando Magic
+C.  Washington Wizards
+D.  Charlotte Hornets
+answer D
+Which team drafted Anthony Davis?
+A.  Clevland Cavaliers
+B.  New Orleans Pelicans
+C.  Los Angles Lakers
+D.  Minnesota Timberwolves
+answer B
+Which team drafted Shaquille O'Neal?
+A.  Miami Heat
+B.  Pheonix Suns
+C.  Orlando Magic
+D.  Los Angles Lakers
+answer C
+Which team was Kevin Garnett traded to from the Minnesota Timberwolves?
+A.  Brooklyn Nets
+B.  Huston Rockets
+C.  Boston Celtics
+D.  76ers
+answer C
+Which team was Demar Derozan traded to from the Toronto Raptors?
+A.  Huston Rockets
+B.  Dallas Mavericks
+C.  San Antonio Spurs
+D.  Chicao Bulls
+answer C
+Which team acquired Kevin Durant from the OKC Thunder?
+A.  Brooklyn Nets
+B.  Portland Trailblazers
+C.  Golden State Warriors
+D.  76ers
+answer C
+PLAYERMC
 Which player won the MVP award in 2000?
 A.	Allen Iverson
 B.	Shaquille O'Neal
@@ -118,12 +215,6 @@ B.	Khris Middleton
 C.	Oscar Robertson
 D.	Giannis Antetokounmpo
 answer D
-What team did Brandon Ingram play for when he won the MIP award in 2020?
-A.	LA Lakers
-B.	New Orleans Pelicans
-C.	Charlotte Hornets
-D.	Portland Trailblazers
-answer B
 Who won the 6MOTY award in 2008?
 A.	Jamal Crawford
 B.	Eric Gordan
@@ -160,37 +251,60 @@ B.	50
 C.	52
 D.	62
 answer C
-What team lost to the Los Angles Lakers in the 2000 finals?
-A.	Detroit Pistons
-B.	San Antonio Spurs
-C.	Indiana Pacers
-D.	Miami Heat
-answer C
-Which team won 3 straight NBA titles between 2000 and 2002?
-A.	San Antonio Spurs
-B.	Los Angles Lakers
-C.	Detriot Pistons
-D.	Chicago Bulls
-answer B
-Which team had 4 straight finals appearances between 2011 and 2014?
-A.	Los Angles Lakers
-B.	Miami Heat
-C.	Golden State Warriors
-D.	San Antonio Spurs
-answer B
-What year did the Toronto Raptors win their first title?
-A.	2015
-B.	2018
-C.	2019
-D.	2020
-answer C
-The Milwaukee Bucks beat the Phoenix Suns in how many games during the 2021 NBA finals?
-A.	4
-B.	5
-C.	6
-D.	7
-answer C
 WORDONLY
+Who won the NBA title in 2008?
+answer Boston Celtics
+Who won the NBA title in 2011?
+answer Dallas Mavericks
+Who won the NBA title in 2012 and 2013?
+answer Miami Heat
+Which team did Chris Paul play for when he won his all-star mvp?
+answer Los Angeles Clippers
+Which team appeared in back to back finals appearances in 2002 and 2003?
+answer New Jersey Nets
+What team lost in 4 games to the San Antonio Spurs in the 2007 finals?
+answer Cleveland Cavaliers
+What was the last year the Golden State Warriors won the NBA title?
+answer 2018
+How many rings did the Golden State Warriors win in the 2010's?
+answer 3
+Which team did Kevin Love play for during his MIP award season?
+answer Minnesota Timberwolves
+How many championships have the Los Angles Lakers won?
+answer 17
+How many championships have the Boston Celtics won?
+answer 17
+How many championships have the Chicago Bulls won?
+answer 6
+How many championships have the Golden State Warriors won?
+answer 6
+How many championships have the San Antonio Spurs won?
+answer 5
+How many championships have the Memphis Grizzlies won?
+answer 0 
+Which team did Kyrie Irving play for after the Boston Celtics?
+answer Brooklyn Nets
+Which team drafted Kareem Abdul Jabbar?
+answer Milwuakee Bucks
+Which team drafted Scottie Pippin?
+answer Seattle SuperSonics
+Which team drafted Dennis Rodman?
+answer Detroit Pistons
+Which team drafted Charles Barkley?
+answer Philadelphia 76ers
+Which team drafted Lamelo Ball?
+answer Charlotte Hornets
+Which team drafted Lonzo Ball?
+answer Los Angles Lakers
+Which team lost in the eastern confernence finals against the Miami Heat in 2020?
+answer Milwuakee Bucks
+Which team lost in the eatern conference finals against the Miluwakee Bucks in 2021?
+answer Brooklyn Nets
+Which team lost in the eastern semi finals vs the Toronto Raptors in 2019?
+answer Philadelphia 76ers
+Which team currently holds the longest active playoff appearnces in 2022?
+answer Portland Trailblazers 
+PLAYERWORD
 Who won the NBA scoring title in 2001 averaging (31.1)ppg?
 answer Allen Iverson
 Who won the NBA scoring title in 2003 averaging (32.1)ppg?
@@ -215,12 +329,6 @@ Who won the NBA scoring title in 2021 averaging (32.0)ppg?
 answer Stephen Curry
 Which player won the MVP award in 2001?
 answer Allen Iverson
-Who won the NBA title in 2008?
-answer Boston Celtics
-Who won the NBA title in 2011?
-answer Dallas Mavericks
-Who won the NBA title in 2012 and 2013?
-answer Miami Heat
 Which center won the DPOY 4 times in 5 consecutive seasons?
 answer Ben Wallace
 Which player won the MVP award in 2003?
@@ -253,18 +361,8 @@ What year did Andre Igoudala win his finals MVP?
 answer 2015
 Which year did Lebron James win his third all-star MVP?
 answer 2018
-Which team did Chris Paul play for when he won his all-star mvp?
-answer Los Angeles Clippers
 What player from the Clevland Cavaliers won the all-star mvp in 2014?
 answer Kyrie Irving
-Which team appeared in back to back finals appearances in 2002 and 2003?
-answer New Jersey Nets
-What team lost in 4 games to the San Antonio Spurs in the 2007 finals?
-answer Cleveland Cavaliers
-What was the last year the Golden State Warriors won the NBA title?
-answer 2018
-How many rings did the Golden State Warriors win in the 2010's?
-answer 3
 Which player won the MVP award in 2008?
 answer Kobe Bryant
 Which player become the youngest ever to win an MVP award in 2011?
@@ -277,8 +375,6 @@ Which french player has won 3 DPOY awards since 2010?
 answer Rudy Gobert
 Which player won MIP award while on the Magic in 2001?
 answer Tracy McGrady
-Which team did Kevin Love play for during his MIP award season?
-answer Minnesota Timberwolves
 Which Chicago Bull player won the MIP award in 2015?
 answer Jimmy Butler
 Which OKC guard won the 6MOTY award in 2012?
