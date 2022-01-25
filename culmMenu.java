@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package culmtest;
 
 /**
@@ -19,7 +14,7 @@ public class culmMenu {
     public static void main(String[] args) throws FileNotFoundException, IOException {
         //set defaults here
         int gamemode1 = 0;
-                ArrayList<Integer> playerScore = new ArrayList();
+        ArrayList<Integer> playerScore = new ArrayList();
         menu(gamemode1,playerScore);
     }
 
@@ -43,7 +38,7 @@ public class culmMenu {
                 settings(playerScore,gamemode1);
             }
             if (selected == 3) {
-                start(gamemode1);
+                System.out.println("acessing"); start(gamemode1,playerScore);
             }
             if (selected == 4) {
                 doHighScore();
@@ -61,7 +56,7 @@ public class culmMenu {
     public static void gamemodes(int gamemode1, ArrayList<Integer> playerScore) throws IOException {
         int pick, pick2, pick3 = 0;
         int teamPlayers;
-        
+
         Scanner input = new Scanner(System.in);
         System.out.println("1. Adjust mix of questions about teams and/or players");
         System.out.println("2. Adjust type of questions");
@@ -102,7 +97,7 @@ public class culmMenu {
                 gamemode1 = 3;
             }
         }
-        
+
         if (pick==3) {menu(gamemode1,playerScore);}
     }
 
@@ -113,39 +108,39 @@ public class culmMenu {
         Scanner input = new Scanner(System.in);
         System.out.println("1. Adjust time limit (or remove it)");
         System.out.println("2. Adjust number of players");
-                System.out.println("3. Back to menu");
+        System.out.println("3. Back to menu");
 
         selected = input.nextInt();
         if (selected==1) {}//code here to adjust timer somehow
         if (selected==2) {System.out.println("Current number of players is: "+playerScore.size());
-int selected1=0;
-        System.out.println("1. Remove players");
-System.out.println("2. Add players");
-selected1=input.nextInt();
-if (selected1==1) {
-    System.out.println("Enter the players you wish to remove (enter d to stop removing players)");
-    boolean done = false;
-    while (!done) {int i; String temp=input.next(); if (temp.equals("done")){done=true; break;} else{
-       i=Integer.parseInt(temp); playerScore.remove(i+1);
-    }}
-}
-if (selected1==2) {System.out.println("Enter how many players you wish to add"); //check if the math checks out here
-int size = playerScore.size();
-int i = 0;
-i = input.nextInt();
-for (int c=size; c<size+i; c++) {
-    playerScore.set(size+c,0);}
-}
-        
+            int selected1=0;
+            System.out.println("1. Remove players");
+            System.out.println("2. Add players");
+            selected1=input.nextInt();
+            if (selected1==1) {
+                System.out.println("Enter the players you wish to remove (enter d to stop removing players)");
+                boolean done = false;
+                while (!done) {int i; String temp=input.next(); if (temp.equals("done")){done=true; break;} else{
+                    i=Integer.parseInt(temp); playerScore.remove(i+1);
+                }}
+            }
+            if (selected1==2) {System.out.println("Enter how many players you wish to add"); //check if the math checks out here
+                int size = playerScore.size();
+                int i = 0;
+                i = input.nextInt();
+                for (int c=size; c<size+i; c++) {
+                    playerScore.set(size+c,0);}
+            }
+
         }
-                if (selected==3) {menu(gamemode1,playerScore);}
+        if (selected==3) {menu(gamemode1,playerScore);}
 
     }
-    
 
-    public static void start(int gamemode1) throws IOException {
+
+    public static void start(int gamemode1, ArrayList<Integer> playerScore) throws IOException {
         //somehow integrate reader into this and then do an action depending on the value of the gamemode or something
-        culmReader(gamemode1);
+        System.out.println("acessing 2");  culmReader(gamemode1,playerScore);
         // if () {}
     }//if this works, you could make it shorter as you could just call culmReader() in the main menu
 
@@ -168,7 +163,7 @@ for (int c=size; c<size+i; c++) {
         System.out.println("3. How to play.");
         System.out.println("4. Highscores.");
         System.out.println("5. Exiting the game.");
-                System.out.println("6. Exit Info Menu.");
+        System.out.println("6. Exit Info Menu.");
 
         select = input.nextInt();
         if (select == 1) {
@@ -198,17 +193,17 @@ for (int c=size; c<size+i; c++) {
         }
         if (select != 6) {
             infoMenu(gamemode1,playerScore);
-          //  select = 0; //can delete this i think
+            //  select = 0; //can delete this i think
         } else{menu(gamemode1,playerScore);}
     }
 
-    public static void culmReader(int gamemode1) throws FileNotFoundException, IOException {
+    public static void culmReader(int gamemode1,ArrayList<Integer> playerScore) throws FileNotFoundException, IOException {
         // import culmmenu.Culmmenu;
-       // Culmmenu cr = new Culmmenu();
+        // Culmmenu cr = new Culmmenu();
         //cr.gamemodes();
-
- int c =0;
-
+        System.out.println("acessing 3");
+        int c =0;
+int co=0;
         //questions, options, and answers stored in array lists
         ArrayList<String> q = new ArrayList();
         ArrayList<String> op = new ArrayList();
@@ -222,13 +217,13 @@ for (int c=size; c<size+i; c++) {
         if (gamemode==0) {wordOnly(q,op,ans);}
         if (gamemode==1) {optionOnly(q,op,ans);}
         if (gamemode==2) {both(q,op,ans);}
-playGame(c);
+        playGame(c,q,op,ans,playerScore,co);
     }
 
     public static void wordOnly(ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans) throws FileNotFoundException, IOException {
         //int co=0;
         //this version adds blank thing to option arraylist to keep acessing in order, may be changed
-
+        System.out.println("acessing 4");
         BufferedReader br= new BufferedReader(new FileReader("qs.txt"));
         String Line;
 
@@ -242,7 +237,7 @@ playGame(c);
 
     public static void optionOnly(ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans) throws FileNotFoundException, IOException {
         int c=0;
-       
+
         String o="";
         BufferedReader br= new BufferedReader(new FileReader("qs.txt"));
         String Line;
@@ -284,55 +279,68 @@ playGame(c);
             else{q.add(Line);} }
         br.close();
     }
-    
-    
-    public static void playGame(int c,ArrayList<String> q,ArrayList<String> op,ArrayList<String> ans, ArrayList<Integer> playerScore){
-	//this one is a definite WIP
-        
-        int players = 1; //obviously integrate diff variable, players is placeholder
-	    Scanner input = new Scanner(System.in);
-	  //  int co = 0; //may use this for recursion but not sure yet
-	    if (players ==1) {
-	        String answer = "";
-	       	Random r = new Random();
-		int num =r.nextInt(q.size())+1; //may have to adjust random based on looping
-System.out.println(q.get(num));
-System.out.println(op.get(num));
+
+
+    public static void playGame(int c,ArrayList<String> q,ArrayList<String> op,ArrayList<String> ans, ArrayList<Integer> playerScore,int co){
+        //this one is a definite WIP
+        System.out.println("acessing 5");
+        if (playerScore.size()==0) {playerScore.add(0);}
+        System.out.println("size: "+playerScore.size());
+
+        int points = 0;
+int timer =2; //note delete this later
+        int players = playerScore.size(); //obviously integrate diff variable, players is placeholder
+        Scanner input = new Scanner(System.in);
+        //  int co = 0; //may use this for recursion but not sure yet
+        if (players ==1) {
+            String answer = "";
+            Random r = new Random();
+            int num =r.nextInt(q.size())+1; //may have to adjust random based on looping
+            System.out.println(q.get(num));
+            System.out.println(op.get(num));
 //timer.start();
-answer  = input.nextLine();
+            answer  = input.nextLine();
 //if timer>time limit decided by court,points = 10-counter, timer.cancel(); timer.purge(); do recursion
 //maybe implement while loop with c condition to prevent infinite loop and whatnot
-if (answer.equls(ans.get(num))) {System.out.println("correct!"); playerScore.get(0)+=points;};
-    else {System.out.println("Incorrect!"); } if (scoreArr.get(0)<50) {playGame(c);}
-}
- 
-if (players>1) { //couldnt this just be an else lol
- int player;
- if (c=0) {player=c;}
- else if (c<scoreArr.size() {c++;player=c;}
- else if (c==scoreArr.size() {c=0; player=c;}
-	    Scanner input = new Scanner(System.in);
-	  //  int co = 0; //may use this for recursion but not sure yet
-	    if (players ==1) {
-	        String ans = "";
-	       	Random r = new Random();
-		int num =r.nextInt(q.size())+1; //may have to adjust random based on looping
-System.out.println(q.get(num));
-System.out.println(op.get(num));
+            if (answer.equals(ans.get(num))) {System.out.println("correct!"); //playerScore.get(0)+=points;
+
+                playerScore.set(0,points+playerScore.get(0));
+            }
+    else {System.out.println("Incorrect!"); } System.out.println("The answer was: "+ans.get(num)); if (timer<2) {playGame(c,q,op,ans,playerScore,co);}
+        }
+
+        if (players>1) { //couldnt this just be an else lol
+            int player;  //is the player variable really necessary
+            if (co==0) {player=c;}
+            else if (c<playerScore.size()) {c++;player=c;}
+ else if (c==playerScore.size()) {c=0; player=c;}
+            //  int co = 0; //may use this for recursion but not sure yet
+           // if (players ==1) {
+                String answer = "";
+                Random r = new Random();
+                int num =r.nextInt(q.size())+1; //may have to adjust random based on looping
+                System.out.println(q.get(num));
+                System.out.println(op.get(num)); //need to develop op
 //timer.start();
-ans  = input.nextLine();
+                answer  = input.nextLine();
 //if timer>time limit decided by court, points = 10-counter, timer.cancel(); timer.purge(); do recursion
 //maybe implement while loop with c condition to prevent infinite loop and whatnot
-if (ans==answers.get(num)) {System.out.println("correct!") scoreArr.get(c)+=points;};
-    else {System.out.println("Incorrect!"); } 
-		    int hi = 0;
-		    for (int i = scoreArr) {if (scoreArr.get(i)>scoreArr.get(hi)) {hi=i;}}
-		    if (scoreArr.get(hi)<50) {playGame(c);}
-		    else {System.out.println("Player "+hi+1+" wins!");}
-	    }
-	 // checkHighScore();
-	}
-    }
-	  //public static void checkHighScore();
-    
+                if (answer==ans.get(num)) {System.out.println("correct!");
+                    playerScore.set(c,points+playerScore.get(c));
+                  //  playerScore.get(c)+=points;
+                }
+    else {System.out.println("Incorrect!"); System.out.println("The answer was: "+ans.get(num));} if (timer<2) {playGame(c,q,op,ans,playerScore,co);}
+
+            }
+            // checkHighScore();
+        }
+   // }
+    //public static void checkHighScore();
+
 }
+/*
+      int hi = 0;
+                for (int i : playerScore) {if (playerScore.get(i)>playerScore.get(hi)) {hi=i;}}
+                if (playerScore.get(hi)<50) {playGame(c);}
+                else {System.out.println("Player "+hi+1+" wins!");}
+ */
