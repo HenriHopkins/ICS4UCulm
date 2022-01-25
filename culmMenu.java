@@ -21,7 +21,6 @@ public static int gamemode2;
 
     public static void menu(int gamemode1,ArrayList<Integer>playerScore) throws IOException {
         int selected = 0;
-        System.out.println("gamemode1 is: "+gamemode1);
         System.out.println("Menu: (Enter the number of the option you wish to select)");
         System.out.println("1. Gamemodes");
         System.out.println("2. Settings");
@@ -130,9 +129,10 @@ public static int gamemode2;
                 int size = playerScore.size();
                 int i = 0;
                 i = input.nextInt();
-                for (int c=size; c<size+i; c++) {
-                    playerScore.set(size+c,0);}
+                for (int c=0; c<i; c++) {
+                 playerScore.add(0);}
             }
+
 
         }
         if (selected==3) {menu(gamemode1,playerScore);}
@@ -318,27 +318,35 @@ int timer =1; //note delete this later, once timer is implemented
             } //due to a lack of timer, points are set to increase by 1 for each question you get right
     else {System.out.println("Incorrect!"); System.out.println("The answer was: "+ans.get(num));}  if (timer<2) {System.out.println("Your score is: "+playerScore.get(0)); playGame(c,q,op,ans,playerScore,co);}
         }
-//the below section is kinda a big mess, and is unfinished
-        if (players>1) { //couldnt this just be an else lol
-            int player;  //is the player variable really necessary
-            if (co==0) {player=c;}
+
+
+
+        if (players>1) {
+            int player;
+            if (co==0) {player=c;co++;}
             else if (c<playerScore.size()) {c++;player=c;}
- else if (c==playerScore.size()) {c=0; player=c;}
-            //  int co = 0; //may use this for recursion but not sure yet
-           // if (players ==1) {
+  if (c==playerScore.size()) {c=0; player=c;} //fix this
                 String answer = "";
                 Random r = new Random();
-                int num =r.nextInt(q.size())+1; //may have to adjust random based on looping
-                System.out.println(q.get(num));
-            if (!op.get(num).isBlank()) {System.out.println(op.get(num));} //gotta develop this
-//timer.start();
+                int num =r.nextInt(q.size()-1)+1;               //does it have to be -1?
+            System.out.println(q.get(num));
+            if (!op.get(num).isBlank()) {
+                String str = op.get(num);
+                String A = str.substring(0,str.indexOf("B."));
+                String B = str.substring(str.indexOf("B."),str.indexOf("C."));
+                String C = str.substring(str.indexOf("C."),str.indexOf("D."));
+                String D = str.substring(str.indexOf("D."));
+                System.out.println(A);
+                System.out.println(B);
+                System.out.println(C);
+                System.out.println(D);
+            }
+            System.out.format("Player "+(c+1)+"'s answer: ");
                 answer  = input.nextLine();
-//if timer>time limit decided by court, points = 10-counter, timer.cancel(); timer.purge(); do recursion
-//maybe implement while loop with c condition to prevent infinite loop and whatnot
                 if (answer.equalsIgnoreCase(ans.get(num))) {System.out.println("correct!");
                     playerScore.set(c,points+playerScore.get(c));
                 }
-    else {System.out.println("Incorrect!"); System.out.println("The answer was: "+ans.get(num));} if (timer<2) {playGame(c,q,op,ans,playerScore,co);}
+    else {System.out.println("Incorrect!"); System.out.println("The answer was: "+ans.get(num));}  System.out.println("Player "+(c+1)+" 's score is: "+playerScore.get(c)); if (timer<2) {playGame(c,q,op,ans,playerScore,co);}
 
             }
 
