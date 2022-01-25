@@ -5,6 +5,7 @@ Tuesday:
 -figure out how to get timer class to loop correctly (need it to not loop at same time, might be possible with integration tho Henri will investigate this)
 -fully implement file writing method to record high scores
 -implement back buttons in psuedo-sub-methods (possibly by dividing them up into real sub-methods)
+-fix multi-player mode
 
 Wednesday:
 -debugging (exit button after exiting info menu for instance)
