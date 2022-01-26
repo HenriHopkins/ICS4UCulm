@@ -1,21 +1,27 @@
 Wednesday:
 -debugging (exit button after exiting info menu for instance)
 -protect against incorrect input (prevent incorrect inputs from crashing the program, henri has code for this from other projects)
--figure out how to get timer class to loop correctly (need it to not loop at same time, might be possible with integration tho Henri will investigate this)
--look to improve overall effiency
+-integrate timer class with multiplayer mode
+-fix bug where timer somehow decreases playerScore size in singlePlayer
 -implement back buttons in psuedo-sub-methods (possibly by dividing them up into real sub-methods)
--optional: tutorial
--write file writing (optional)
--Henri does last checks
--if we're really ahead of schedule, GUI
 
 Thursday:
+-Henri does last checks
 -make it look pretty (court)
 -Either Heni presents in person or we present online on friday
+-Court can expand info to basically include everything yk
 -Court can check it over too and submit
 
 Friday:
 -virtual presentation?
+
+
+Optional:
+-write file writing (optional)
+-if we're really ahead of schedule, GUI
+-optional: tutorial
+-look to improve overall effiency
+
 
 Project outline:
   -starts:
