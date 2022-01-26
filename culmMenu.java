@@ -13,13 +13,14 @@ public class culmMenu {
 public static int gamemode2;
     public static void main(String[] args) throws FileNotFoundException, IOException {
         //set defaults here
-        int gamemode1 = 0;
+        int gamemode1 = 2;
+        int teamPlayer=2;
         ArrayList<Integer> playerScore = new ArrayList();
         playerScore.add(0);
-        menu(gamemode1,playerScore);
+        menu(gamemode1,playerScore,teamPlayer);
     }
 
-    public static void menu(int gamemode1,ArrayList<Integer>playerScore) throws IOException {
+    public static void menu(int gamemode1,ArrayList<Integer>playerScore, int teamPlayer) throws IOException {
         int selected = 0;
         System.out.println("Menu: (Enter the number of the option you wish to select)");
         System.out.println("1. Gamemodes");
@@ -33,30 +34,33 @@ public static int gamemode2;
         selected = input.nextInt();
         if (selected != 6) {
             if (selected == 1) {
-                gamemodes(gamemode1,playerScore);
+                gamemodes(gamemode1,playerScore,teamPlayer);
             }
             if (selected == 2) {
-                settings(playerScore,gamemode1);
+                settings(playerScore,gamemode1,teamPlayer);
             }
             if (selected == 3) {
-               start(gamemode1,playerScore);
+               start(gamemode1,playerScore,teamPlayer);
             }
             if (selected == 4) {
                 doHighScore();
             }
             if (selected == 5) {
-                infoMenu(gamemode1,playerScore);
+                infoMenu(gamemode1,playerScore,teamPlayer);
             }
-            menu(gamemode1,playerScore);
+            menu(gamemode1,playerScore,teamPlayer);
         } if (selected==6) {
-            System.out.println("Exited."); //exited doesnt work on the first try for some reason
+             exitGame();//exited doesnt work on the first try for some reason
         }
     }
 
+public static void exitGame () {
+        System.out.println("Exited");
+} //figure this out because its making u do an exit for  each back button, causing the back buttons to be a bit defunct
 
-    public static void gamemodes(int gamemode1, ArrayList<Integer> playerScore) throws IOException {
+    public static void gamemodes(int gamemode1, ArrayList<Integer> playerScore, int teamPlayer) throws IOException {
         int pick, pick2, pick3 = 0;
-        int teamPlayers; //rn this is a defunct variable but if we decide to implement the team/player feature we'll use it
+      //rn this is a defunct variable but if we decide to implement the team/player feature we'll use it
 //note that if we were to use it i'd to have to set it as a default like I did with gamemode1
         Scanner input = new Scanner(System.in);
         System.out.println("1. Adjust mix of questions about teams and/or players");
@@ -69,13 +73,13 @@ public static int gamemode2;
             System.out.println("3. Randomized mix of both");
             pick2 = input.nextInt();
             if (pick2 == 1) {
-                teamPlayers = 0;
+                teamPlayer = 0;  menu(gamemode1,playerScore, teamPlayer);
             }
             if (pick2 == 2) {
-                teamPlayers = 1;
+                teamPlayer = 1; menu(gamemode1,playerScore, teamPlayer);
             }
             if (pick2 == 3) {
-                teamPlayers = 2;
+                teamPlayer = 2; menu(gamemode1,playerScore, teamPlayer);
             }
         }
         if (pick == 2) {
@@ -88,23 +92,23 @@ public static int gamemode2;
             // CulmReader cr = new CulmReader();
             //cr.wordOnly();
             if (pick3 == 1) {
-       gamemode1 = 1; menu(gamemode1,playerScore);
+       gamemode1 = 1; menu(gamemode1,playerScore, teamPlayer);
 
             }
             if (pick3 == 2) {
-                gamemode1 = 0; menu(gamemode1,playerScore);
+                gamemode1 = 0; menu(gamemode1,playerScore, teamPlayer);
             }
             if (pick3 == 3) {
-                gamemode1 = 2; menu(gamemode1,playerScore);
+                gamemode1 = 2; menu(gamemode1,playerScore, teamPlayer);
             }
         }
 
-        if (pick==3) {menu(gamemode1,playerScore);}
+        if (pick==3) {menu(gamemode1,playerScore, teamPlayer);}
     }
 
 
 
-    public static void settings(ArrayList<Integer> playerScore, int gamemode1) throws IOException {
+    public static void settings(ArrayList<Integer> playerScore, int gamemode1,int teamPlayer) throws IOException {
         int selected = 0;
         Scanner input = new Scanner(System.in);
         System.out.println("1. Adjust time limit (or remove it)");
@@ -135,14 +139,14 @@ public static int gamemode2;
 
 
         }
-        if (selected==3) {menu(gamemode1,playerScore);}
+        if (selected==3) {menu(gamemode1,playerScore, teamPlayer);}
 
     }
 
 
-    public static void start(int gamemode1, ArrayList<Integer> playerScore) throws IOException {
+    public static void start(int gamemode1, ArrayList<Integer> playerScore, int teamPlayer) throws IOException {
 
- culmReader(gamemode1,playerScore);
+ culmReader(gamemode1,playerScore, teamPlayer);
 
     }//if this works (which it does atm), we probs could make it shorter as you could just call culmReader() in the main menu
 
@@ -157,7 +161,7 @@ public static int gamemode2;
         br.close();
     }
 
-    public static void infoMenu(int gamemode1, ArrayList<Integer> playerScore) throws IOException {
+    public static void infoMenu(int gamemode1, ArrayList<Integer> playerScore, int teamPlayer) throws IOException {
         int select;
         Scanner input = new Scanner(System.in);
         System.out.println("Welcome to the Info Menu");
@@ -195,12 +199,12 @@ public static int gamemode2;
             System.out.println("-To exit the game select the \"Exit\" tab.");
         }
         if (select != 6) {
-            infoMenu(gamemode1,playerScore);
+            infoMenu(gamemode1,playerScore, teamPlayer);
             //  select = 0; //can delete this i think
-        } else{menu(gamemode1,playerScore);}
+        } else{menu(gamemode1,playerScore, teamPlayer);}
     }
 
-    public static void culmReader(int gamemode1,ArrayList<Integer> playerScore) throws FileNotFoundException, IOException {
+    public static void culmReader(int gamemode1,ArrayList<Integer> playerScore, int teamPlayer) throws FileNotFoundException, IOException {
         // import culmmenu.Culmmenu;
         // Culmmenu cr = new Culmmenu();
         //cr.gamemodes();
@@ -216,35 +220,46 @@ int co=0;
 
         //  ignore: int gamemode = cr.gamemodes().gamemode1;
         int gamemode = gamemode1;
-        if (gamemode==0) { wordOnly(q,op,ans);}
-        if (gamemode==1) {optionOnly(q,op,ans);}
-        if (gamemode==2) {both(q,op,ans);}
+        if (gamemode==0) { wordOnly(q,op,ans,teamPlayer);}
+        if (gamemode==1) {optionOnly(q,op,ans,teamPlayer);}
+        if (gamemode==2) {both(q,op,ans,teamPlayer);}
         playGame(c,q,op,ans,playerScore,co);
     }
 
-    public static void wordOnly(ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans) throws FileNotFoundException, IOException {
+    public static void wordOnly(ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans,int teamPlayer) throws FileNotFoundException, IOException {
         //this version adds blank thing to option arraylist to keep acessing in order
-        int temp = 0;
+        int temp = 0,valid=0;
         BufferedReader br= new BufferedReader(new FileReader("qs.txt"));
         String Line;
 //i changed the questions file so that the word questions and multi-choice questions are seperated by "WORDONLY" to make this easier
         while((Line=br.readLine())!=null){
+            if (teamPlayer==0) {if(Line.contains("PLAYERWORD")){valid=1;} if(Line.contains("WORDONLY")) {valid=0;temp=1;} }
+            if (teamPlayer==1) {if (Line.contains("PLAYERWORD")) {valid=0;} if (Line.contains("WORDONLY")){valid=1;} }
+            if (teamPlayer==2) {if(!(Line.contains("PLAYERWORD"))) {valid=1;} else{valid=0;}}
+
+            if (valid!=0&&!(Line.contains("PLAYERMC")||Line.contains("PLAYERWORD"))) {
 if (Line.contains("WORDONLY")) {temp = 1; }
 else if (temp==1) {
 if(Line.contains("answer")) {ans.add(Line.substring(Line.indexOf("answer")+7));op.add("");}
 //change this if questions are longer than a line
-            else{q.add(Line);} }}
+            else{q.add(Line);} }}}
         br.close();
     }
 
-    public static void optionOnly(ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans) throws FileNotFoundException, IOException {
-        int c=0;
+    public static void optionOnly(ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int teamPlayer) throws FileNotFoundException, IOException {
+       //
+        int c=0,valid=0,temp=0;
         String o="";
         BufferedReader br= new BufferedReader(new FileReader("qs.txt"));
         String Line;
 
         while((Line=br.readLine())!=null){
-           if (!Line.contains("WORDONLY")) {
+            if (teamPlayer==0) {if(Line.contains("PLAYERMC")){valid=1;}}
+            if (teamPlayer==1) {if (Line.contains("PLAYERMC")) {valid=0; temp++;} else if (temp==0){valid=1;}}
+            if (teamPlayer==2) {if(!(Line.contains("PLAYERMC"))) {valid=1;} else{valid=0;}}
+
+            if (valid!=0&&!(Line.contains("PLAYERMC")||Line.contains("PLAYERWORD"))) {
+            if (!Line.contains("WORDONLY")) {
             c++;
             if (c==1) {q.add(Line);}
             else if (c==2){o+=Line;}
@@ -254,40 +269,61 @@ if(Line.contains("answer")) {ans.add(Line.substring(Line.indexOf("answer")+7));o
             else if (c==6/*may not be needed:*/&&Line.contains("answer")) {ans.add(Line.substring(Line.indexOf("answer")+7));c=0;} }
            else{break;}
 //change this if questions are longer than a line (no questions are longer than a line rn so we good)
-        }
+        }}
         br.close();
     }
 
 
-    public static void both(ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans) throws FileNotFoundException, IOException {
+    public static void both(ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int teamPlayer) throws FileNotFoundException, IOException {
         //this version adds blank thing to option arraylist to keep accessing in order
 //does combination of both readers, this works bc of WORLDONLY separation
-        int c=0,temp=0;
+        int c=0,temp=0,valid=0,valid1=1;
         String o="";
         BufferedReader br= new BufferedReader(new FileReader("qs.txt"));
         String Line;
 
         while((Line=br.readLine())!=null){
-            if (!Line.contains("WORDONLY")&&temp!=1) {
-                c++;
-                if (c==1) {q.add(Line);}
-                else if (c==2){o+=Line;}
-                else if (c==3){o+=Line;}
-                else if (c==4){o+=Line;}
-                else if (c==5){o+=Line;op.add(o);o="";}
-                else if (c==6/*may not be needed:*/&&Line.contains("answer")) {ans.add(Line.substring(Line.indexOf("answer")+7));c=0;} }
-            else if (Line.contains("WORDONLY")){temp=1;} else if (temp==1) {if(Line.contains("answer")) {ans.add(Line.substring(Line.indexOf("answer")+7));op.add("");}
-            else{q.add(Line);}}
+            if (teamPlayer==0) {if(Line.contains("PLAYERMC")||Line.contains("PLAYERWORD")){valid=1;} if(Line.contains("WORDONLY")) {valid=0;temp=1;} }
+            if (teamPlayer==1) {if(valid1==1||Line.contains("WORDONLY")){ valid=1;} if (Line.contains("PLAYERMC")||Line.contains("PLAYERWORD")) {valid=0; valid1=0;}  }
+            if (teamPlayer==2) {if(!(Line.contains("PLAYERMC")||Line.contains("PLAYERWORD"))) {valid=1;} else{valid=0;}} //isnt this line gonna be defunct lol
+            //siemthing that prevents it from gettings the words? lol^
+
+
+            if (valid!=0&&!(Line.contains("PLAYERMC")||Line.contains("PLAYERWORD"))) {
+               // bothCheck(Line,q,op,ans,temp,c,o);
+
+                if (!Line.contains("WORDONLY")&&temp!=1) {
+                    c++;
+                    if (c==1) {q.add(Line);}
+                    else if (c==2){o+=Line;}
+                    else if (c==3){o+=Line;}
+                    else if (c==4){o+=Line;}
+                    else if (c==5){o+=Line;op.add(o);o="";}
+                    else if (c==6/*may not be needed:*/&&Line.contains("answer")) {ans.add(Line.substring(Line.indexOf("answer")+7));c=0;} }
+                else if (Line.contains("WORDONLY")){temp=1; System.out.println("accessed1");} else if (temp==1) {if(Line.contains("answer")) {ans.add(Line.substring(Line.indexOf("answer")+7));op.add("");}
+                else{q.add(Line);}}
+
+            }
 //change this if questions are longer than a line
         }
         br.close();
     }
 
+//    public static void bothCheck (String Line, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int temp, int c, String o) {
+
+
+
+
+
+   // }
+
 
     public static void playGame(int c,ArrayList<String> q,ArrayList<String> op,ArrayList<String> ans, ArrayList<Integer> playerScore,int co){
         //this one is still a bit of a WIP, especially with the highScore and timer, plus multiplayer has not been tested as of yet
-
         int points = 1;
+//for (String a : op) {
+    //System.out.println(a);
+//}
 int timer =1; //note delete this later, once timer is implemented
         int players = playerScore.size();
         Scanner input = new Scanner(System.in);
@@ -296,7 +332,10 @@ int timer =1; //note delete this later, once timer is implemented
             Random r = new Random();
             int num =r.nextInt(q.size()-1)+1; //may have to adjust random based on looping, so far so good, although it does repeat some things so I could change it if we need
             System.out.println(q.get(num));
-            if (!op.get(num).isBlank()) {
+           // System.out.println("op.get is: "+op.get(num));
+            if (!(op.get(num).isBlank())) {
+               // System.out.println(op.get((num)));
+             //   System.out.println("acessing");
                 String str = op.get(num);
                 String A = str.substring(0,str.indexOf("B."));
                 String B = str.substring(str.indexOf("B."),str.indexOf("C."));
@@ -331,6 +370,7 @@ int timer =1; //note delete this later, once timer is implemented
                 int num =r.nextInt(q.size()-1)+1;               //does it have to be -1?
             System.out.println(q.get(num));
             if (!op.get(num).isBlank()) {
+                System.out.println(op.get(num));
                 String str = op.get(num);
                 String A = str.substring(0,str.indexOf("B."));
                 String B = str.substring(str.indexOf("B."),str.indexOf("C."));
