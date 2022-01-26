@@ -5,6 +5,7 @@ Tuesday:
 -fully implement file writing method to record high scores
 -implement back buttons in psuedo-sub-methods (possibly by dividing them up into real sub-methods)
 -make it look pretty (court)
+-optional: tutorial
 
 Wednesday:
 -debugging (exit button after exiting info menu for instance)
@@ -12,7 +13,7 @@ Wednesday:
 -if we're really ahead of schedule, GUI
 
 Thursday:
--We present in person (?)
+-Either Heni presents in person or we present online on friday
 -Court can check it over too and submit
 
 Friday:
