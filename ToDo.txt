@@ -1,7 +1,6 @@
 Tuesday:
 -protect against incorrect input (prevent incorrect inputs from crashing the program, henri has code for this from other projects)
--look to improve overall effiency/extra work we can do
--address player/team modes (possibly scrap that)
+-look to improve overall effiency
 -figure out how to get timer class to loop correctly (need it to not loop at same time, might be possible with integration tho Henri will investigate this)
 -fully implement file writing method to record high scores
 -implement back buttons in psuedo-sub-methods (possibly by dividing them up into real sub-methods)
