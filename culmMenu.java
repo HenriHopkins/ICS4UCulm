@@ -9,18 +9,42 @@ import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 public class culmMenu {
-public static int gamemode2;
+    private String tem = "";
+    private int n=0;
+    private ArrayList<String> q = new ArrayList();
+    private ArrayList<String> op = new ArrayList();
+    private ArrayList<String> ans = new ArrayList();
+    private ArrayList<Integer> playerScore = new ArrayList();
+    private int co=0;
+    TimerTask task = new TimerTask()
+    {
+        public void run()
+        {
+            if( tem.equals("") )
+            {
+                System.out.println( "you input nothing. exit..." );
+          //      System.exit( 0 );
+                try {
+                    playGame(n,q,op,ans,playerScore,co);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    };
     public static void main(String[] args) throws FileNotFoundException, IOException {
         //set defaults here
         int gamemode1 = 2;
         int teamPlayer=2;
         ArrayList<Integer> playerScore = new ArrayList();
         playerScore.add(0);
-        menu(gamemode1,playerScore,teamPlayer);
+        menu(gamemode1,playerScore,teamPlayer,q,op,ans,n);
     }
 
-    public static void menu(int gamemode1,ArrayList<Integer>playerScore, int teamPlayer) throws IOException {
+    public static void menu(int gamemode1,ArrayList<Integer>playerScore, int teamPlayer, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int n) throws IOException {
         int selected = 0;
         System.out.println("Menu: (Enter the number of the option you wish to select)");
         System.out.println("1. Gamemodes");
@@ -40,7 +64,7 @@ public static int gamemode2;
                 settings(playerScore,gamemode1,teamPlayer);
             }
             if (selected == 3) {
-               start(gamemode1,playerScore,teamPlayer);
+               start(gamemode1,playerScore,teamPlayer,q,op,ans,n);
             }
             if (selected == 4) {
                 doHighScore();
@@ -144,9 +168,9 @@ public static void exitGame () {
     }
 
 
-    public static void start(int gamemode1, ArrayList<Integer> playerScore, int teamPlayer) throws IOException {
+    public static void start(int gamemode1, ArrayList<Integer> playerScore, int teamPlayer,ArrayList<String> q,ArrayList<String> op,ArrayList<String> ans, int n) throws IOException {
 
- culmReader(gamemode1,playerScore, teamPlayer);
+ culmReader(gamemode1,playerScore, teamPlayer,q,op,ans,n);
 
     }//if this works (which it does atm), we probs could make it shorter as you could just call culmReader() in the main menu
 
@@ -204,18 +228,17 @@ public static void exitGame () {
         } else{menu(gamemode1,playerScore, teamPlayer);}
     }
 
-    public static void culmReader(int gamemode1,ArrayList<Integer> playerScore, int teamPlayer) throws FileNotFoundException, IOException {
+    public static void culmReader(int gamemode1,ArrayList<Integer> playerScore, int teamPlayer, ArrayList<String> q,ArrayList<String> op,ArrayList<String> ans, int n) throws FileNotFoundException, IOException {
         // import culmmenu.Culmmenu;
         // Culmmenu cr = new Culmmenu();
         //cr.gamemodes();
         //ignore^
-        int c =0;
 int co=0;
-
+int t=0;
         //questions, options, and answers stored in array lists
-        ArrayList<String> q = new ArrayList();
-        ArrayList<String> op = new ArrayList();
-        ArrayList<String> ans = new ArrayList();
+      //  ArrayList<String> q = new ArrayList();
+     //   ArrayList<String> op = new ArrayList();
+     //   ArrayList<String> ans = new ArrayList();
 
 
         //  ignore: int gamemode = cr.gamemodes().gamemode1;
@@ -223,7 +246,7 @@ int co=0;
         if (gamemode==0) { wordOnly(q,op,ans,teamPlayer);}
         if (gamemode==1) {optionOnly(q,op,ans,teamPlayer);}
         if (gamemode==2) {both(q,op,ans,teamPlayer);}
-        playGame(c,q,op,ans,playerScore,co);
+        playGame(n,q,op,ans,playerScore,co,t);
     }
 
     public static void wordOnly(ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans,int teamPlayer) throws FileNotFoundException, IOException {
@@ -318,54 +341,60 @@ if(Line.contains("answer")) {ans.add(Line.substring(Line.indexOf("answer")+7));o
    // }
 
 
-    public static void playGame(int c,ArrayList<String> q,ArrayList<String> op,ArrayList<String> ans, ArrayList<Integer> playerScore,int co) throws IOException {
+    public static void playGame(int n,ArrayList<String> q,ArrayList<String> op,ArrayList<String> ans, ArrayList<Integer> playerScore,int co) throws IOException {
         //this one is still a bit of a WIP, especially with the highScore and timer, plus multiplayer has not been tested as of yet
-        int points = 1;
 //for (String a : op) {
     //System.out.println(a);
 //}
-int timer =1; //note delete this later, once timer is implemented
+      /*  Timer time = new Timer();
+        TimerTask task = new TimerTask() {
+            int ct=10;
+            public void run(){
+                if (ct>0) {
+                    ct--;
+                } else if (ct>=0){System.out.println("TIMES UP"); time.cancel(); time.purge();}
+            }
+        };
+        if (t>0) {time.cancel(); time.purge(); t=0; playGame(c,q,op,ans,playerScore,co,t);}
+*/
+
+
+
+
+
+
+//int d==;
+//int timer =1; //note delete this later, once timer is implemented
+     int   points =1;
         int players = playerScore.size();
         Scanner input = new Scanner(System.in);
         if (players ==1) {
             String answer = "";
             Random r = new Random();
             int num =r.nextInt(q.size()-1)+1; //may have to adjust random based on looping, so far so good, although it does repeat some things so I could change it if we need
-            System.out.println(q.get(num));
+           // System.out.println(q.get(num));
+           doIt(num,q,op,ans,playerScore);
            // System.out.println("op.get is: "+op.get(num));
-            if (!(op.get(num).isBlank())) {
-               // System.out.println(op.get((num)));
-             //   System.out.println("accessing");
-                String str = op.get(num);
-                String A = str.substring(0,str.indexOf("B."));
-                String B = str.substring(str.indexOf("B."),str.indexOf("C."));
-                String C = str.substring(str.indexOf("C."),str.indexOf("D."));
-                String D = str.substring(str.indexOf("D."));
-                System.out.println(A);
-                System.out.println(B);
-                System.out.println(C);
-                System.out.println(D);
 
-                   }
 //ignore the following comments, its just me thinking outloud timer.start();
-            answer  = input.nextLine();
+        //   answer  = input.nextLine();
 //if timer>time limit decided by court,points = 10-counter, timer.cancel(); timer.purge(); do recursion
 //maybe implement while loop with c condition to prevent infinite loop and whatnot
-            if (answer.equalsIgnoreCase(ans.get(num))) {System.out.println("correct!");
+            //if (answer.equalsIgnoreCase(ans.get(num))) {System.out.println("correct!");
 
-                playerScore.set(0,points+playerScore.get(0));
-            } //due to a lack of timer, points are set to increase by 1 for each question you get right
-    else {System.out.println("Incorrect!"); System.out.println("The answer was: "+ans.get(num));}  if (timer<2) {System.out.println("Your score is: "+playerScore.get(0)); playGame(c,q,op,ans,playerScore,co);}
-    else {System.out.println("TIMES UP"); }
-        }
+               // playerScore.set(0,points+playerScore.get(0));
+         //   } //due to a lack of timer, points are set to increase by 1 for each question you get right
+   // else {System.out.println("Incorrect!"); System.out.println("The answer was: "+ans.get(num));}  if (timer<2) {System.out.println("Your score is: "+playerScore.get(0)); t++; playGame(c,q,op,ans,playerScore,co,t);}
+    //else {System.out.println("TIMES UP"); }
+      }
 
 
 
         if (players>1) {
             int player;
-            if (co==0) {player=c;co++;}
-            else if (c<playerScore.size()) {c++;player=c;}
-  if (c==playerScore.size()) {c=0; player=c;} //fix this
+            if (co==0) {player=n;co++;}
+            else if (n<playerScore.size()) {n++;player=n;}
+  if (n==playerScore.size()) {n=0; player=n;} //fix this
                 String answer = "";
                 Random r = new Random();
                 int num =r.nextInt(q.size()-1)+1;               //does it have to be -1?
@@ -382,18 +411,18 @@ int timer =1; //note delete this later, once timer is implemented
                 System.out.println(C);
                 System.out.println(D);
             }
-            System.out.format("Player "+(c+1)+"'s answer: ");
+            System.out.format("Player "+(n+1)+"'s answer: ");
                 answer  = input.nextLine();
                 if (answer.equalsIgnoreCase(ans.get(num))) {System.out.println("correct!");
-                    playerScore.set(c,points+playerScore.get(c));
+                    playerScore.set(n,points+playerScore.get(n));
                 }
-    else {System.out.println("Incorrect!"); System.out.println("The answer was: "+ans.get(num));}  System.out.println("Player "+(c+1)+" 's score is: "+playerScore.get(c)); if (timer<2) {playGame(c,q,op,ans,playerScore,co);}
-else {System.out.println("TIMES UP");} //must integrate timer yktv
+    else {System.out.println("Incorrect!"); System.out.println("The answer was: "+ans.get(num));} // System.out.println("Player "+(c+1)+" 's score is: "+playerScore.get(c)); if (timer<2) {playGame(c,q,op,ans,playerScore,co,t);}
+//else {System.out.println("TIMES UP");} //must integrate timer yktv
             int hi = 0;
             for (int i = 0; i<playerScore.size(); i++) {if (playerScore.get(i)>playerScore.get(hi)) {hi=i;}}
             System.out.println("Player "+hi+1+" wins with a final score of "+playerScore.get(hi)+"!");
             }
-checkHighScore(playerScore);
+//checkHighScore(playerScore);
         }
     //once the game is stopped, call highScore method? checkHighScore();
     public static void checkHighScore(ArrayList<Integer> playerScore) throws IOException {
@@ -429,6 +458,53 @@ Scanner input = new Scanner(System.in);
             WriteFile.newLine();
         }
         WriteFile.close();
+    }
+
+    public void getInput(int num, ArrayList<String> q,ArrayList<String> op,ArrayList<String> ans, ArrayList<Integer> playerScore) throws Exception
+    {
+        Timer timer = new Timer();
+        timer.schedule( task, 10*1000 ); //just do it here
+        int points = 1;
+
+        System.out.println(q.get(num));
+        if (!(op.get(num).isBlank())) {
+            // System.out.println(op.get((num)));
+            //   System.out.println("accessing");
+            String str = op.get(num);
+            String A = str.substring(0,str.indexOf("B."));
+            String B = str.substring(str.indexOf("B."),str.indexOf("C."));
+            String C = str.substring(str.indexOf("C."),str.indexOf("D."));
+            String D = str.substring(str.indexOf("D."));
+            System.out.println(A);
+            System.out.println(B);
+            System.out.println(C);
+            System.out.println(D);
+        }
+        BufferedReader in = new BufferedReader(
+                new InputStreamReader( System.in ) );
+        tem = in.readLine();
+
+        timer.cancel();
+        if (tem.equalsIgnoreCase(ans.get(num))) {System.out.println("correct!");
+
+            playerScore.set(0,points+playerScore.get(0));
+        }
+
+        else {System.out.println("Incorrect!"); System.out.println("The answer was: "+ans.get(num));}
+        //System.out.println( "you have entered: "+ tem );
+    }
+
+    public static void doIt(int num, ArrayList<String> q, ArrayList<String> op,ArrayList<String> ans,ArrayList<Integer> playerScore)
+    {
+        try
+        {
+            (new culmMenu()).getInput(num,q,op,ans,playerScore);
+        }
+        catch( Exception e )
+        {
+            System.out.println( e );
+        }
+        System.out.println( "main exit..." );
     }
 
 }
