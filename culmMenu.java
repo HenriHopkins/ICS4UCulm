@@ -48,7 +48,7 @@ public static int gamemode2;
             if (selected == 5) {
                 infoMenu(gamemode1,playerScore,teamPlayer);
             }
-            menu(gamemode1,playerScore,teamPlayer);
+           // menu(gamemode1,playerScore,teamPlayer);
         } if (selected==6) {
              exitGame();//exited doesnt work on the first try for some reason
         }
@@ -318,7 +318,7 @@ if(Line.contains("answer")) {ans.add(Line.substring(Line.indexOf("answer")+7));o
    // }
 
 
-    public static void playGame(int c,ArrayList<String> q,ArrayList<String> op,ArrayList<String> ans, ArrayList<Integer> playerScore,int co){
+    public static void playGame(int c,ArrayList<String> q,ArrayList<String> op,ArrayList<String> ans, ArrayList<Integer> playerScore,int co) throws IOException {
         //this one is still a bit of a WIP, especially with the highScore and timer, plus multiplayer has not been tested as of yet
         int points = 1;
 //for (String a : op) {
@@ -335,7 +335,7 @@ int timer =1; //note delete this later, once timer is implemented
            // System.out.println("op.get is: "+op.get(num));
             if (!(op.get(num).isBlank())) {
                // System.out.println(op.get((num)));
-             //   System.out.println("acessing");
+             //   System.out.println("accessing");
                 String str = op.get(num);
                 String A = str.substring(0,str.indexOf("B."));
                 String B = str.substring(str.indexOf("B."),str.indexOf("C."));
@@ -356,6 +356,7 @@ int timer =1; //note delete this later, once timer is implemented
                 playerScore.set(0,points+playerScore.get(0));
             } //due to a lack of timer, points are set to increase by 1 for each question you get right
     else {System.out.println("Incorrect!"); System.out.println("The answer was: "+ans.get(num));}  if (timer<2) {System.out.println("Your score is: "+playerScore.get(0)); playGame(c,q,op,ans,playerScore,co);}
+    else {System.out.println("TIMES UP"); }
         }
 
 
@@ -387,15 +388,51 @@ int timer =1; //note delete this later, once timer is implemented
                     playerScore.set(c,points+playerScore.get(c));
                 }
     else {System.out.println("Incorrect!"); System.out.println("The answer was: "+ans.get(num));}  System.out.println("Player "+(c+1)+" 's score is: "+playerScore.get(c)); if (timer<2) {playGame(c,q,op,ans,playerScore,co);}
-
+else {System.out.println("TIMES UP");} //must integrate timer yktv
+            int hi = 0;
+            for (int i = 0; i<playerScore.size(); i++) {if (playerScore.get(i)>playerScore.get(hi)) {hi=i;}}
+            System.out.println("Player "+hi+1+" wins with a final score of "+playerScore.get(hi)+"!");
             }
-
+checkHighScore(playerScore);
         }
     //once the game is stopped, call highScore method? checkHighScore();
-    //public static void checkHighScore();
+    public static void checkHighScore(ArrayList<Integer> playerScore) throws IOException {
+        ArrayList<Integer> highScores = new ArrayList();
+        ArrayList<String> data = new ArrayList();
+
+        BufferedReader br= new BufferedReader(new FileReader("data.txt"));
+        String Line;
+
+        while((Line=br.readLine())!=null){
+           data.add(Line);
+highScores.add(Integer.parseInt(Line.substring(0,Line.indexOf(" "))));
+        }
+        br.close();
+
+
+Scanner input = new Scanner(System.in);
+        int hi = 0;
+        if (highScores.isEmpty()) {highScores.add(0);}
+        for (int i = 0; i<playerScore.size(); i++) {if (playerScore.get(i)>playerScore.get(hi)) {hi=i;
+            String initials = "";
+            System.out.println("NEW HIGH SCORE!!");
+            System.out.println("Player "+hi+" enter your initials");
+            initials = input.next(); //add thing ensuring they can only be 2 characters long
+            data.add(playerScore.get(hi).toString()+" "+initials);
+
+        }}
+     //   else {System.out.println("Player "+hi+1+" wins!");}
+//sort data ?
+        BufferedWriter WriteFile = new BufferedWriter(new FileWriter("highScore.txt.true"));
+        for(int intC=0;intC<data.size();intC++){
+            WriteFile.write(data.get(intC));
+            WriteFile.newLine();
+        }
+        WriteFile.close();
+    }
 
 }
-
+//quicksort?
 
 /*
       int hi = 0;
@@ -403,3 +440,10 @@ int timer =1; //note delete this later, once timer is implemented
                 if (playerScore.get(hi)<50) {playGame(c);}
                 else {System.out.println("Player "+hi+1+" wins!");}
  */
+/*
+max=numbers.get(0);
+        min=numbers.get(0);
+        for(int intC=1; intC<numbers.size();intC++){
+        if(numbers.get(intC)>max){max=numbers.get(intC);}
+        if(numbers.get(intC)<min){min=numbers.get(intC);} */
+        //delete last one if high score array list > 10
