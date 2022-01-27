@@ -13,20 +13,21 @@ import java.util.Collections;
 public class culmMenu {
     int sP=0;
     public String tem = "";
-    public static int n=0;
+    public static int n;
     public static ArrayList<String> q = new ArrayList();
     public static ArrayList<String> op = new ArrayList();
     public static ArrayList<String> ans = new ArrayList();
     private  ArrayList<Integer> playerScore = new ArrayList();
-    public int gamemode1=2;
-    public int teamPlayer=2;
-    public static int co=0;
-    public static int runs=0;
-    public int timeLimit=10;
+    public static int gamemode1;
+    public static int teamPlayer;
+   // public static int co=0;
+  //  public static int runs=0;
+    public static int timeLimit;
     Timer timer = new Timer();
     TimerTask task = new TimerTask() {
         public void run() {
             sP++;
+           System.out.println("timeLimit is"+timeLimit);
          //   System.out.println("sP is: "+sP);
                     if (sP>=timeLimit) {System.out.println("TIMES UP"); System.out.println("Press enter to return to menu"); //Scanner may = new Scanner(System.in); for (int c=0; c<1; c++) {may.close();}//timer.cancel(); timer.purge();
                         try {
@@ -65,27 +66,29 @@ public class culmMenu {
     }
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        //set defaults here
-
-        int gamemode1 = 2;
-       int timeLimit=120;
-        int teamPlayer=2;
-        ArrayList<Integer> playerScore = new ArrayList();
-        System.out.println("accessing main");
-        playerScore.add(0);
-        menu(gamemode1,playerScore,teamPlayer,q,op,ans,n,timeLimit);
-
+       defaults();
     }
-
+public static void defaults() throws IOException {
+     //set defaults here
+timeLimit=10;
+        int gamemode1 = 2;
+      // int timeLimit=120;
+        int teamPlayer=2;
+        n=0;
+        ArrayList<Integer> playerScore = new ArrayList();
+        playerScore.add(0);
+menu(gamemode1,playerScore, teamPlayer,q,op,ans,n,timeLimit);       // menu(gamemode1,playerScore,teamPlayer,q,op,ans,n,timeLimit);
+}
     public static void menu(int gamemode1,ArrayList<Integer>playerScore, int teamPlayer, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int n, int timeLimit) throws IOException {
         int selected = 0;
         System.out.println("Menu: (Enter the number of the option you wish to select)");
         System.out.println("1. Gamemodes");
         System.out.println("2. Settings");
-        System.out.println("3. Start Game");
-        System.out.println("4. Display high scores");
-        System.out.println("5. Info (recommended for new players)");
-        System.out.println("6. Exit");
+        System.out.println("3. Reset gamemodes and settings to default");
+        System.out.println("4. Start Game");
+        System.out.println("5. Display high scores");
+        System.out.println("6. Info (recommended for new players)");
+        System.out.println("7. Exit");
         Scanner s = new Scanner(System.in);
 //note to henri: write thing to prevent invalid input
 
@@ -101,16 +104,19 @@ public class culmMenu {
                 settings(playerScore,gamemode1,teamPlayer,q,op,ans,n,timeLimit);
             }
             if (selected == 3) {
-                start(gamemode1,playerScore,teamPlayer,q,op,ans,n);
+               defaults();
             }
             if (selected == 4) {
-                doHighScore(gamemode1,teamPlayer,playerScore,timeLimit);
+                start(gamemode1,playerScore,teamPlayer,q,op,ans,n);
             }
             if (selected == 5) {
+                doHighScore(gamemode1,teamPlayer,playerScore,timeLimit);
+            }
+            if (selected == 6) {
                 infoMenu(gamemode1,playerScore,teamPlayer,q,op,ans,timeLimit);
             }
             // menu(gamemode1,playerScore,teamPlayer);
-        } if (selected==6) {
+        } if (selected==7) {
             exitGame();//exited doesnt work on the first try for some reason
         }
     }
@@ -206,7 +212,7 @@ public class culmMenu {
         System.out.println("3. Back to main menu");
 
         selected = input.nextInt();
-        if (selected==1) {timerSettings(playerScore,gamemode1,teamPlayer,q,op,ans,n,timeLimit);}
+        if (selected==1) {timerSettings(playerScore,gamemode1,teamPlayer,q,op,ans,n);}
 
 
 
@@ -216,14 +222,14 @@ public class culmMenu {
         if (selected==3) {menu(gamemode1,playerScore, teamPlayer,q,op,ans,n,timeLimit);}
 
     }
-    public static void timerSettings(ArrayList<Integer> playerScore, int gamemode1,int teamPlayer, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int n, int timeLimit) throws IOException {int selected1=0;
+    public static void timerSettings(ArrayList<Integer> playerScore, int gamemode1,int teamPlayer, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int n) throws IOException {int selected1=0;
         Scanner input = new Scanner(System.in);
         System.out.println("The current time limit is: ");
         System.out.println("1. Change the Time Limit (or remove it)");
         System.out.println("2. Back to settings menu");
         System.out.println("3. Back to main menu");
         selected1=input.nextInt();
-        if(selected1==1){timeLimit=input.nextInt(); menu(gamemode1,playerScore, teamPlayer,q,op,ans,n,timeLimit);}
+        if(selected1==1){System.out.println("enter the new timeLimit (enter 0 to remove it?"); timeLimit=input.nextInt(); menu(gamemode1,playerScore, teamPlayer,q,op,ans,n,timeLimit);}
         if (selected1==2) {settings(playerScore,gamemode1,teamPlayer,q,op,ans,n,timeLimit);}
         if (selected1==3) {menu(gamemode1,playerScore, teamPlayer,q,op,ans,n,timeLimit);}
     }
@@ -536,18 +542,7 @@ tem = may.nextLine();
             else if(tem.equals("ENDGAME")) {exitGame();}
             else {System.out.println("Incorrect!"); System.out.println("The answer was: "+ans.get(num));}
             if (points==1) {playGame(n,q,op,ans,playerScore,co);}
-            // System.out.println("op.get is: "+op.get(num));
-
-//ignore the following comments, its just me thinking outloud timer.start();
-            //   answer  = input.nextLine();
-//if timer>time limit decided by court,points = 10-counter, timer.cancel(); timer.purge(); do recursion
-//maybe implement while loop with c condition to prevent infinite loop and whatnot
-            //if (answer.equalsIgnoreCase(ans.get(num))) {System.out.println("correct!");
-
-            // playerScore.set(0,points+playerScore.get(0));
-            //   } //due to a lack of timer, points are set to increase by 1 for each question you get right
-            // else {System.out.println("Incorrect!"); System.out.println("The answer was: "+ans.get(num));}  if (timer<2) {System.out.println("Your score is: "+playerScore.get(0)); t++; playGame(c,q,op,ans,playerScore,co,t);}
-            //else {System.out.println("TIMES UP"); }
+          
         }
 
 
@@ -627,7 +622,6 @@ int low=0;
                 if(numbers.get(intC)<min){min=numbers.get(intC);}
             low=intC;}
             if(hi>low){names.remove(low); numbers.remove(low);
-                //highScores.add(playerScore.get(winner));
                 System.out.println("NEW HIGH SCORE!");
                 System.out.println("Enter your initials (first and last name only):");
             String temp = input.nextLine();
@@ -642,84 +636,10 @@ names.add(temp); numbers.add(playerScore.get(winner));
         insertionSort(numbers,names);
 playerScore.remove(winner);
 if(playerScore.size()>1) {checkHighScore(playerScore);}
-     //   if (highScores.isEmpty()) {highScores.add(0);}
-
-
-
-
-       /* for (int i = 0; i<playerScore.size(); i++) {if (playerScore.get(i)>playerScore.get(hi)) {hi=i;
-            String initials = "";
-            System.out.println("NEW HIGH SCORE!!");
-            System.out.println("Player "+hi+" enter your initials");
-            initials = input.next(); //add thing ensuring they can only be 2 characters long
-            data.add(playerScore.get(hi).toString()+" "+initials);
-        }} */
-        //   else {System.out.println("Player "+hi+1+" wins!");}
-//sort data ?
+    
 
     }
 
-  /*  public void getInput(int num, ArrayList<String> q,ArrayList<String> op,ArrayList<String> ans, ArrayList<Integer> playerScore) throws Exception
-    {
-        Timer timer = new Timer();
-        timer.schedule( task, 10*1000 ); //just do it here
-        int points = 1;
-        System.out.println("accessing getInput");
-        System.out.println(q.get(num));
-        if (!(op.get(num).isBlank())) {
-            // System.out.println(op.get((num)));
-            //   System.out.println("accessing");
-            String str = op.get(num);
-            String A = str.substring(0,str.indexOf("B."));
-            String B = str.substring(str.indexOf("B."),str.indexOf("C."));
-            String C = str.substring(str.indexOf("C."),str.indexOf("D."));
-            String D = str.substring(str.indexOf("D."));
-            System.out.println(A);
-            System.out.println(B);
-            System.out.println(C);
-            System.out.println(D);
-        }
-        System.out.println("tem1 is: "+tem);
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader( System.in ) );
-        tem = in.readLine();
-System.out.println("tem2 is: "+tem);
-        timer.cancel();
-        if (tem.equalsIgnoreCase(ans.get(num))) {System.out.println("correct!");
-            playerScore.set(0,points+playerScore.get(0));
-        }
-        else if(tem.equals("ENDGAME")) {exitGame();}
-        else {System.out.println("Incorrect!"); System.out.println("The answer was: "+ans.get(num));}
-        //System.out.println( "you have entered: "+ tem );
-    } */
-
- /*   public static void doIt(int num, ArrayList<String> q, ArrayList<String> op,ArrayList<String> ans,ArrayList<Integer> playerScore) throws IOException
-    {
-        System.out.println("accessing doIt");
-        try
-        {
-            (new culmMenu()).getInput(num,q,op,ans,playerScore);
-        }
-        catch( Exception e )
-        {
-            System.out.println( e );
-        }
-        playGame(n,q,op,ans,playerScore,co);
-    }   */
+  
 
 }
-//quicksort?
-
-/*
-      int hi = 0;
-                for (int i : playerScore) {if (playerScore.get(i)>playerScore.get(hi)) {hi=i;}}
-                if (playerScore.get(hi)<50) {playGame(c);}
-                else {System.out.println("Player "+hi+1+" wins!");}
- */
-/*
-max=numbers.get(0);
-        min=numbers.get(0);
-        for(int intC=1; intC<numbers.size();intC++){
-        if(numbers.get(intC)>max){max=numbers.get(intC);}
-        if(numbers.get(intC)<min){min=numbers.get(intC);} */
-//delete last one if high score array list > 10
