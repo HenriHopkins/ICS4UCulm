@@ -34,7 +34,7 @@ public class culmMenu {
                             e.printStackTrace();
                         }
                     }
-        }
+        } //if all else fails just write press enter before putting in input lmao
     };
     /* TimerTask task = new TimerTask()
      {
