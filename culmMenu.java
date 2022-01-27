@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-
+import java.util.Collections;
 
 
 public class culmMenu {
@@ -27,7 +27,7 @@ public class culmMenu {
         public void run() {
             sP++;
             System.out.println("sP is: "+sP);
-                    if (sP>=10) {System.out.println("TIMES UP"); //timer.cancel(); timer.purge();
+                    if (sP>=10) {System.out.println("TIMES UP"); System.out.println("Press enter to return to menu"); //Scanner may = new Scanner(System.in); for (int c=0; c<1; c++) {may.close();}//timer.cancel(); timer.purge();
                         try {
                             menu(gamemode1,playerScore,  teamPlayer,  q,  op,  ans,  n);
                         } catch (IOException e) {
@@ -89,13 +89,13 @@ public class culmMenu {
         System.out.println("2. Settings");
         System.out.println("3. Start Game");
         System.out.println("4. Display high scores");
-        System.out.println("5. Info");
+        System.out.println("5. Info (recommended for new players)");
         System.out.println("6. Exit");
-        Scanner input = new Scanner(System.in);
+        Scanner s = new Scanner(System.in);
 //note to henri: write thing to prevent invalid input
 
         System.out.println("Picking menu");
-        String i = input.nextLine();
+        String i = s.nextLine();
         System.out.println("PickED menu");
         selected = Integer.parseInt(i);
         if (selected != 6) {
@@ -109,7 +109,7 @@ public class culmMenu {
                 start(gamemode1,playerScore,teamPlayer,q,op,ans,n);
             }
             if (selected == 4) {
-                doHighScore();
+                doHighScore(gamemode1,teamPlayer,playerScore);
             }
             if (selected == 5) {
                 infoMenu(gamemode1,playerScore,teamPlayer,q,op,ans,n);
@@ -266,15 +266,29 @@ public class culmMenu {
 
     }//if this works (which it does atm), we probs could make it shorter as you could just call culmReader() in the main menu
 
-    public static void doHighScore() throws FileNotFoundException, IOException {
+    public static void doHighScore(int gamemode1,int teamPlayer,ArrayList<Integer> playerScore) throws FileNotFoundException, IOException {
         //code that displays highscores, we still need one that records it either in a connected method to playGame, or playGame itself
+    ArrayList<Integer> numbers = new ArrayList();
+        ArrayList<String> names = new ArrayList();
+        BufferedReader d = new BufferedReader(new FileReader("highscores.txt"));
+        String dLine;
+        while ((dLine = d.readLine()) != null) {
+numbers.add(Integer.parseInt(dLine.substring(dLine.indexOf(" ")+1)));
+names.add(dLine.substring(0,dLine.indexOf(":")));
+        }
+        d.close();
+
+
+
+insertionSort(numbers,names);
+
         BufferedReader br = new BufferedReader(new FileReader("highscores.txt"));
         String Line;
-
         while ((Line = br.readLine()) != null) {
             System.out.println(Line);
         }
         br.close();
+        menu(gamemode1,playerScore, teamPlayer,q,op,ans,n);
     }
 
     public static void infoMenu(int gamemode1, ArrayList<Integer> playerScore, int teamPlayer, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int n) throws IOException {
@@ -320,6 +334,26 @@ public class culmMenu {
         } else{menu(gamemode1,playerScore, teamPlayer,q,op,ans,n);}
     }
 
+    public static void insertionSort(ArrayList<Integer> numbers,ArrayList<String> names) throws IOException {
+        int j;
+        for(int i=1; i<numbers.size();i++){
+            j=i;
+            while(j>0 && numbers.get(j).compareTo(numbers.get(j-1))<0){
+                Collections.swap(numbers, j, j-1);
+                Collections.swap(names, j, j-1);
+                j--;
+            }
+        }
+
+
+        BufferedWriter WriteFile = new BufferedWriter(new FileWriter("highscores.txt"));
+        for(int intC=0;intC<numbers.size();intC++){
+            WriteFile.write(names.get(intC)+": "+numbers.get(intC));
+            WriteFile.newLine();
+        }
+        WriteFile.close();
+
+    }
     public static void culmReader(int gamemode1,ArrayList<Integer> playerScore, int teamPlayer, ArrayList<String> q,ArrayList<String> op,ArrayList<String> ans, int n) throws FileNotFoundException, IOException {
         // import culmmenu.Culmmenu;
         // Culmmenu cr = new Culmmenu();
@@ -493,9 +527,9 @@ public class culmMenu {
             }
 
             System.out.println("tem1 is: "+tem);
-Scanner input = new Scanner(System.in);
-tem = input.nextLine();
-            input.reset();
+Scanner may = new Scanner(System.in);
+tem = may.nextLine();
+          //  input.reset();
             //  BufferedReader in = new BufferedReader(
                  //   new InputStreamReader( System.in ) );
          //   tem = in.readLine();
@@ -563,38 +597,70 @@ tem = input.nextLine();
     }
     //once the game is stopped, call highScore method? checkHighScore();
     public static void checkHighScore(ArrayList<Integer> playerScore) throws IOException {
-        ArrayList<Integer> highScores = new ArrayList();
-        ArrayList<String> data = new ArrayList();
+        ArrayList<Integer> numbers = new ArrayList();
+        ArrayList<String> names = new ArrayList();
 
-        BufferedReader br= new BufferedReader(new FileReader("data.txt"));
+        BufferedReader br= new BufferedReader(new FileReader("highscores.txt"));
         String Line;
 
         while((Line=br.readLine())!=null){
-            data.add(Line);
-            highScores.add(Integer.parseInt(Line.substring(0,Line.indexOf(" "))));
+            numbers.add(Integer.parseInt(Line.substring(Line.indexOf(" ")+1)));
+            names.add(Line.substring(0,Line.indexOf(":")));
         }
         br.close();
 
 
         Scanner input = new Scanner(System.in);
-        int hi = 0;
-        if (highScores.isEmpty()) {highScores.add(0);}
-        for (int i = 0; i<playerScore.size(); i++) {if (playerScore.get(i)>playerScore.get(hi)) {hi=i;
+        int winner = 0;
+int low=0;
+        //search for winner (highest score)
+        int hi=playerScore.get(0);
+        for(int intC=1; intC<playerScore.size();intC++) {
+            if (playerScore.get(intC) > hi) {
+                hi = playerScore.get(intC); winner=intC;
+            }
+        }
+
+        if (names.size()==5) { int max=numbers.get(0);
+            int min=numbers.get(0);
+            for(int intC=1; intC<numbers.size();intC++){
+                if(numbers.get(intC)>max){max=numbers.get(intC);}
+                if(numbers.get(intC)<min){min=numbers.get(intC);}
+            low=intC;}
+            if(hi>low){names.remove(low); numbers.remove(low);
+                //highScores.add(playerScore.get(winner));
+                System.out.println("NEW HIGH SCORE!");
+                System.out.println("Enter your initials (first and last name only):");
+            String temp = input.nextLine();
+            //write thing here to prevent it from being more than two lines yk
+names.add(temp); numbers.add(playerScore.get(winner));
+            }}
+        else{  System.out.println("NEW HIGH SCORE!");
+            System.out.println("Enter your initials (first and last name only):");
+            String temp = input.nextLine();
+            //write thing here to prevent it from being more than two lines yk
+            names.add(temp); numbers.add(playerScore.get(winner));}
+
+
+
+        insertionSort(numbers,names);
+
+     //   if (highScores.isEmpty()) {highScores.add(0);}
+
+
+
+
+       /* for (int i = 0; i<playerScore.size(); i++) {if (playerScore.get(i)>playerScore.get(hi)) {hi=i;
             String initials = "";
             System.out.println("NEW HIGH SCORE!!");
             System.out.println("Player "+hi+" enter your initials");
             initials = input.next(); //add thing ensuring they can only be 2 characters long
             data.add(playerScore.get(hi).toString()+" "+initials);
 
-        }}
+        }} */
         //   else {System.out.println("Player "+hi+1+" wins!");}
 //sort data ?
-        BufferedWriter WriteFile = new BufferedWriter(new FileWriter("highScore.txt.true"));
-        for(int intC=0;intC<data.size();intC++){
-            WriteFile.write(data.get(intC));
-            WriteFile.newLine();
-        }
-        WriteFile.close();
+
     }
 
   /*  public void getInput(int num, ArrayList<String> q,ArrayList<String> op,ArrayList<String> ans, ArrayList<Integer> playerScore) throws Exception
