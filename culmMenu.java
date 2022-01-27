@@ -22,14 +22,15 @@ public class culmMenu {
     public int teamPlayer=2;
     public static int co=0;
     public static int runs=0;
+    public int timeLimit=10;
     Timer timer = new Timer();
     TimerTask task = new TimerTask() {
         public void run() {
             sP++;
-            System.out.println("sP is: "+sP);
-                    if (sP>=10) {System.out.println("TIMES UP"); System.out.println("Press enter to return to menu"); //Scanner may = new Scanner(System.in); for (int c=0; c<1; c++) {may.close();}//timer.cancel(); timer.purge();
+         //   System.out.println("sP is: "+sP);
+                    if (sP>=timeLimit) {System.out.println("TIMES UP"); System.out.println("Press enter to return to menu"); //Scanner may = new Scanner(System.in); for (int c=0; c<1; c++) {may.close();}//timer.cancel(); timer.purge();
                         try {
-                            menu(gamemode1,playerScore,  teamPlayer,  q,  op,  ans,  n);
+                            menu(gamemode1,playerScore,  teamPlayer,  q,  op,  ans,  n,timeLimit);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -43,13 +44,10 @@ public class culmMenu {
              if( tem.equals("") )
              {                 System.out.println("0size is: "+playerScore.size());
                  if (playerScore.size()==0) {playerScore.add(0);}
-
                  System.out.println("TIME IS UP");
                  System.out.println("1size is: "+playerScore.size());
-
                      runs++;
                      System.out.println("accessing run");
-
                  try {
                      playGame(n,q,op,ans,playerScore,co);
                  } catch (IOException e) {
@@ -57,13 +55,9 @@ public class culmMenu {
                  }
                  System.out.println("accessing run2");
                      System.out.println("2size is: "+playerScore.size());
-
                      //      System.exit( 0 );
-
-
              }
              //   if(tem.equals("ENDGAME")) {exitGame();}
-
          }
      }; */
     public void startTimer() {
@@ -74,15 +68,16 @@ public class culmMenu {
         //set defaults here
 
         int gamemode1 = 2;
+       int timeLimit=120;
         int teamPlayer=2;
         ArrayList<Integer> playerScore = new ArrayList();
         System.out.println("accessing main");
         playerScore.add(0);
-        menu(gamemode1,playerScore,teamPlayer,q,op,ans,n);
+        menu(gamemode1,playerScore,teamPlayer,q,op,ans,n,timeLimit);
 
     }
 
-    public static void menu(int gamemode1,ArrayList<Integer>playerScore, int teamPlayer, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int n) throws IOException {
+    public static void menu(int gamemode1,ArrayList<Integer>playerScore, int teamPlayer, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int n, int timeLimit) throws IOException {
         int selected = 0;
         System.out.println("Menu: (Enter the number of the option you wish to select)");
         System.out.println("1. Gamemodes");
@@ -94,25 +89,25 @@ public class culmMenu {
         Scanner s = new Scanner(System.in);
 //note to henri: write thing to prevent invalid input
 
-        System.out.println("Picking menu");
+       // System.out.println("Picking menu");
         String i = s.nextLine();
-        System.out.println("PickED menu");
+       // System.out.println("PickED menu");
         selected = Integer.parseInt(i);
         if (selected != 6) {
             if (selected == 1) {
-                gamemodes(gamemode1,playerScore,teamPlayer,q,op,ans,n);
+                gamemodes(gamemode1,playerScore,teamPlayer,q,op,ans,n,timeLimit);
             }
             if (selected == 2) {
-                settings(playerScore,gamemode1,teamPlayer,q,op,ans,n);
+                settings(playerScore,gamemode1,teamPlayer,q,op,ans,n,timeLimit);
             }
             if (selected == 3) {
                 start(gamemode1,playerScore,teamPlayer,q,op,ans,n);
             }
             if (selected == 4) {
-                doHighScore(gamemode1,teamPlayer,playerScore);
+                doHighScore(gamemode1,teamPlayer,playerScore,timeLimit);
             }
             if (selected == 5) {
-                infoMenu(gamemode1,playerScore,teamPlayer,q,op,ans,n);
+                infoMenu(gamemode1,playerScore,teamPlayer,q,op,ans,timeLimit);
             }
             // menu(gamemode1,playerScore,teamPlayer);
         } if (selected==6) {
@@ -124,7 +119,7 @@ public class culmMenu {
         System.out.println("Exited"); System.exit(0);
     } //figure this out because its making u do an exit for  each back button, causing the back buttons to be a bit defunct
 
-    public static void gamemodes(int gamemode1, ArrayList<Integer> playerScore, int teamPlayer, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int n) throws IOException {
+    public static void gamemodes(int gamemode1, ArrayList<Integer> playerScore, int teamPlayer, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int n, int timeLimit) throws IOException {
         int pick=0;
         //rn this is a defunct variable but if we decide to implement the team/player feature we'll use it
 //note that if we were to use it i'd to have to set it as a default like I did with gamemode1
@@ -133,17 +128,17 @@ public class culmMenu {
         System.out.println("2. Adjust type of questions");
         System.out.println("3. Back to menu");
         pick = input.nextInt();
-        if (pick == 1) {teamsOrPlayers(playerScore,gamemode1,teamPlayer,q,op,ans,n);}
+        if (pick == 1) {teamsOrPlayers(playerScore,gamemode1,teamPlayer,q,op,ans,n,timeLimit);}
 
 
-        if (pick == 2) {questionType(playerScore,gamemode1,teamPlayer,q,op,ans,n);}
+        if (pick == 2) {questionType(playerScore,gamemode1,teamPlayer,q,op,ans,n,timeLimit);}
 
 
 
-        if (pick==3) {menu(gamemode1,playerScore, teamPlayer,q,op,ans,n);}
+        if (pick==3) {menu(gamemode1,playerScore, teamPlayer,q,op,ans,n,timeLimit);}
     }
 
-    public static void teamsOrPlayers(ArrayList<Integer> playerScore, int gamemode1,int teamPlayer, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int n) throws IOException {
+    public static void teamsOrPlayers(ArrayList<Integer> playerScore, int gamemode1,int teamPlayer, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int n, int timeLimit) throws IOException {
       int pick2=0;
         Scanner input = new Scanner(System.in);
         System.out.println("1. Questions about players only");
@@ -154,23 +149,23 @@ public class culmMenu {
         pick2 = input.nextInt();
         if (pick2 == 1) {
             teamPlayer = 0;
-            menu(gamemode1, playerScore, teamPlayer, q, op, ans, n);
+            menu(gamemode1, playerScore, teamPlayer, q, op, ans, n,timeLimit);
         }
         if (pick2 == 2) {
             teamPlayer = 1;
-            menu(gamemode1, playerScore, teamPlayer, q, op, ans, n);
+            menu(gamemode1, playerScore, teamPlayer, q, op, ans, n,timeLimit);
         }
         if (pick2 == 3) {
             teamPlayer = 2;
-            menu(gamemode1, playerScore, teamPlayer, q, op, ans, n);
+            menu(gamemode1, playerScore, teamPlayer, q, op, ans, n,timeLimit);
         }
         if (pick2 == 4) {
-            gamemodes(gamemode1, playerScore, teamPlayer, q, op, ans, n);
+            gamemodes(gamemode1, playerScore, teamPlayer, q, op, ans, n,timeLimit);
         }
-        if (pick2==5) {menu(gamemode1,playerScore, teamPlayer,q,op,ans,n);}
+        if (pick2==5) {menu(gamemode1,playerScore, teamPlayer,q,op,ans,n,timeLimit);}
 
     }
-    public static void questionType(ArrayList<Integer> playerScore, int gamemode1,int teamPlayer, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int n) throws IOException {
+    public static void questionType(ArrayList<Integer> playerScore, int gamemode1,int teamPlayer, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int n,int timeLimit) throws IOException {
         int pick3=0;
         Scanner input = new Scanner(System.in);
         System.out.println("1. Multiple choice questions only");
@@ -185,25 +180,25 @@ public class culmMenu {
         //cr.wordOnly();
         if (pick3 == 1) {
             gamemode1 = 1;
-            menu(gamemode1, playerScore, teamPlayer, q, op, ans, n);
+            menu(gamemode1, playerScore, teamPlayer, q, op, ans, n,timeLimit);
 
         }
         if (pick3 == 2) {
             gamemode1 = 0;
-            menu(gamemode1, playerScore, teamPlayer, q, op, ans, n);
+            menu(gamemode1, playerScore, teamPlayer, q, op, ans, n,timeLimit);
         }
         if (pick3 == 3) {
             gamemode1 = 2;
-            menu(gamemode1, playerScore, teamPlayer, q, op, ans, n);
+            menu(gamemode1, playerScore, teamPlayer, q, op, ans, n,timeLimit);
         }
         if (pick3 == 4) {
-            gamemodes(gamemode1, playerScore, teamPlayer, q, op, ans, n);
+            gamemodes(gamemode1, playerScore, teamPlayer, q, op, ans, n,timeLimit);
         }
-        if (pick3==5) {menu(gamemode1,playerScore, teamPlayer,q,op,ans,n);}
+        if (pick3==5) {menu(gamemode1,playerScore, teamPlayer,q,op,ans,n,timeLimit);}
 
 
     }
-    public static void settings(ArrayList<Integer> playerScore, int gamemode1,int teamPlayer, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int n) throws IOException {
+    public static void settings(ArrayList<Integer> playerScore, int gamemode1,int teamPlayer, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int n, int timeLimit) throws IOException {
         int selected = 0;
         Scanner input = new Scanner(System.in);
         System.out.println("1. Adjust time limit (or remove it)");
@@ -211,29 +206,29 @@ public class culmMenu {
         System.out.println("3. Back to main menu");
 
         selected = input.nextInt();
-        if (selected==1) {timerSettings(playerScore,gamemode1,teamPlayer,q,op,ans,n);}
+        if (selected==1) {timerSettings(playerScore,gamemode1,teamPlayer,q,op,ans,n,timeLimit);}
 
 
 
         //code here to adjust timer somehow
-        if (selected==2) {playerNumbers(playerScore,gamemode1,teamPlayer,q,op,ans,n);
+        if (selected==2) {playerNumbers(playerScore,gamemode1,teamPlayer,q,op,ans,n,timeLimit);
         }
-        if (selected==3) {menu(gamemode1,playerScore, teamPlayer,q,op,ans,n);}
+        if (selected==3) {menu(gamemode1,playerScore, teamPlayer,q,op,ans,n,timeLimit);}
 
     }
-    public static void timerSettings(ArrayList<Integer> playerScore, int gamemode1,int teamPlayer, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int n) throws IOException {int selected1=0;
+    public static void timerSettings(ArrayList<Integer> playerScore, int gamemode1,int teamPlayer, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int n, int timeLimit) throws IOException {int selected1=0;
         Scanner input = new Scanner(System.in);
         System.out.println("The current time limit is: ");
-        System.out.println("1. Increase Time Limit");
-        System.out.println("2. Decrease Time Limit (or remove it)");
-        System.out.println("3. Back to settings menu");
-        System.out.println("4. Back to main menu");
+        System.out.println("1. Change the Time Limit (or remove it)");
+        System.out.println("2. Back to settings menu");
+        System.out.println("3. Back to main menu");
         selected1=input.nextInt();
-        if (selected1==3) {settings(playerScore,gamemode1,teamPlayer,q,op,ans,n);}
-        if (selected1==4) {menu(gamemode1,playerScore, teamPlayer,q,op,ans,n);}
+        if(selected1==1){timeLimit=input.nextInt(); menu(gamemode1,playerScore, teamPlayer,q,op,ans,n,timeLimit);}
+        if (selected1==2) {settings(playerScore,gamemode1,teamPlayer,q,op,ans,n,timeLimit);}
+        if (selected1==3) {menu(gamemode1,playerScore, teamPlayer,q,op,ans,n,timeLimit);}
     }
 
-    public static void playerNumbers(ArrayList<Integer> playerScore, int gamemode1,int teamPlayer, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int n) throws IOException {System.out.println("Current number of players is: "+playerScore.size());
+    public static void playerNumbers(ArrayList<Integer> playerScore, int gamemode1,int teamPlayer, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int n, int timeLimit) throws IOException {System.out.println("Current number of players is: "+playerScore.size());
       Scanner input = new Scanner(System.in);
         int selected1=0;
         System.out.println("1. Remove players");
@@ -254,10 +249,10 @@ public class culmMenu {
             int i = 0;
             i = input.nextInt();
             for (int c=0; c<i; c++) {
-                playerScore.add(0); menu(gamemode1,playerScore,teamPlayer,q,op,ans,n);}
+                playerScore.add(0); menu(gamemode1,playerScore,teamPlayer,q,op,ans,n,timeLimit);}
         }
-        if (selected1==3) {settings(playerScore,gamemode1,teamPlayer,q,op,ans,n);}
-        if (selected1==4) {menu(gamemode1,playerScore, teamPlayer,q,op,ans,n);}
+        if (selected1==3) {settings(playerScore,gamemode1,teamPlayer,q,op,ans,n,timeLimit);}
+        if (selected1==4) {menu(gamemode1,playerScore, teamPlayer,q,op,ans,n,timeLimit);}
     }
 
     public static void start(int gamemode1, ArrayList<Integer> playerScore, int teamPlayer,ArrayList<String> q,ArrayList<String> op,ArrayList<String> ans, int n) throws IOException {
@@ -266,7 +261,7 @@ public class culmMenu {
 
     }//if this works (which it does atm), we probs could make it shorter as you could just call culmReader() in the main menu
 
-    public static void doHighScore(int gamemode1,int teamPlayer,ArrayList<Integer> playerScore) throws FileNotFoundException, IOException {
+    public static void doHighScore(int gamemode1,int teamPlayer,ArrayList<Integer> playerScore,int timeLimit) throws FileNotFoundException, IOException {
         //code that displays highscores, we still need one that records it either in a connected method to playGame, or playGame itself
     ArrayList<Integer> numbers = new ArrayList();
         ArrayList<String> names = new ArrayList();
@@ -288,10 +283,10 @@ insertionSort(numbers,names);
             System.out.println(Line);
         }
         br.close();
-        menu(gamemode1,playerScore, teamPlayer,q,op,ans,n);
+        menu(gamemode1,playerScore, teamPlayer,q,op,ans,n,timeLimit);
     }
 
-    public static void infoMenu(int gamemode1, ArrayList<Integer> playerScore, int teamPlayer, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int n) throws IOException {
+    public static void infoMenu(int gamemode1, ArrayList<Integer> playerScore, int teamPlayer, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int timeLimit) throws IOException {
         int select;
         Scanner input = new Scanner(System.in);
         System.out.println("Welcome to the Info Menu");
@@ -331,7 +326,7 @@ insertionSort(numbers,names);
         if (select != 6) {
             infoMenu(gamemode1,playerScore, teamPlayer,q,op,ans,n);
             //  select = 0; //can delete this i think
-        } else{menu(gamemode1,playerScore, teamPlayer,q,op,ans,n);}
+        } else{menu(gamemode1,playerScore, teamPlayer,q,op,ans,n,timeLimit);}
     }
 
     public static void insertionSort(ArrayList<Integer> numbers,ArrayList<String> names) throws IOException {
@@ -496,7 +491,6 @@ insertionSort(numbers,names);
         int players = playerScore.size();
         String tem = "";
       /* boolean safe = false;
-
         while (!safe) {
         if (runs>0) {Scanner input = new Scanner(System.in); input.close();}
         else {Scanner input = new Scanner(System.in); runs=0; safe=true; break;}
@@ -613,6 +607,11 @@ tem = may.nextLine();
         Scanner input = new Scanner(System.in);
         int winner = 0;
 int low=0;
+
+
+//alt timer to close input
+//.remove player score in loop for high scores
+
         //search for winner (highest score)
         int hi=playerScore.get(0);
         for(int intC=1; intC<playerScore.size();intC++) {
@@ -640,11 +639,9 @@ names.add(temp); numbers.add(playerScore.get(winner));
             String temp = input.nextLine();
             //write thing here to prevent it from being more than two lines yk
             names.add(temp); numbers.add(playerScore.get(winner));}
-
-
-
         insertionSort(numbers,names);
-
+playerScore.remove(winner);
+if(playerScore.size()>1) {checkHighScore(playerScore);}
      //   if (highScores.isEmpty()) {highScores.add(0);}
 
 
@@ -656,7 +653,6 @@ names.add(temp); numbers.add(playerScore.get(winner));
             System.out.println("Player "+hi+" enter your initials");
             initials = input.next(); //add thing ensuring they can only be 2 characters long
             data.add(playerScore.get(hi).toString()+" "+initials);
-
         }} */
         //   else {System.out.println("Player "+hi+1+" wins!");}
 //sort data ?
@@ -669,7 +665,6 @@ names.add(temp); numbers.add(playerScore.get(winner));
         timer.schedule( task, 10*1000 ); //just do it here
         int points = 1;
         System.out.println("accessing getInput");
-
         System.out.println(q.get(num));
         if (!(op.get(num).isBlank())) {
             // System.out.println(op.get((num)));
@@ -685,14 +680,12 @@ names.add(temp); numbers.add(playerScore.get(winner));
             System.out.println(D);
         }
         System.out.println("tem1 is: "+tem);
-
         BufferedReader in = new BufferedReader(
                 new InputStreamReader( System.in ) );
         tem = in.readLine();
 System.out.println("tem2 is: "+tem);
         timer.cancel();
         if (tem.equalsIgnoreCase(ans.get(num))) {System.out.println("correct!");
-
             playerScore.set(0,points+playerScore.get(0));
         }
         else if(tem.equals("ENDGAME")) {exitGame();}
