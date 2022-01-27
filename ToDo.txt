@@ -1,12 +1,10 @@
 Thursday:
--morning:
 -protect against incorrect input (prevent incorrect inputs from crashing the program, henri has code for this from other projects)
+-maybe get timer to fully work but thats a low priority atp
 -integrate timer class with multiplayer mode
--fix bug where timer somehow decreases playerScore size in singlePlayer
 -make it look pretty (court)
 
 -Henri does last checks
--Either Heni presents in person or we present online on friday
 -Court can expand info to basically include everything yk
 -Court can check it over too and submit
 
@@ -15,7 +13,6 @@ Friday:
 
 
 Optional:
--write file writing (optional)
 -if we're really ahead of schedule, GUI
 -optional: tutorial
 -look to improve overall effiency
