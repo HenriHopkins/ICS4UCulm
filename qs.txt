@@ -35,7 +35,7 @@ C.	Charlotte Hornets
 D.	Portland Trailblazers
 answer B
 What team did James Harden get traded to from the OKC?
-A.  Brookyln Nets
+A.  Brooklyn Nets
 B.  Washinton Wizards
 C.  San Antonio Spurs
 D.  Huston Rockets
@@ -86,7 +86,7 @@ Which team was Demar Derozan traded to from the Toronto Raptors?
 A.  Huston Rockets
 B.  Dallas Mavericks
 C.  San Antonio Spurs
-D.  Chicao Bulls
+D.  Chicago Bulls
 answer C
 Which team acquired Kevin Durant from the OKC Thunder?
 A.  Brooklyn Nets
@@ -125,13 +125,13 @@ B.	Kevin Durant
 C.	Steve Nash
 D.	Lebron James
 answer D
-Which player won their third and forth MVP in 2012 and 2013?
+Which player won their third and fourth MVP in 2012 and 2013?
 A.	Steph Curry
 B.	Tim Duncan
 C.	Lebron James
 D.	Kevin Durant
 answer C
-Which player was the first unamimous MVP winner in 2016?
+Which player was the first unanimous MVP winner in 2016?
 A.	Lebron James
 B.	Kevin Durant
 C.	Russell Westbrook
@@ -155,7 +155,7 @@ B.	Carmello Anthony
 C.	Lebron James
 D.	Derrick Rose
 answer C
-Which foward won the Rookie of the Year in 2008?
+Which forward won the Rookie of the Year in 2008?
 A.	Lebron James
 B.	Demar Derozan 
 C.	Kevin Durant
@@ -285,7 +285,7 @@ answer 0
 Which team did Kyrie Irving play for after the Boston Celtics?
 answer Brooklyn Nets
 Which team drafted Kareem Abdul Jabbar?
-answer Milwuakee Bucks
+answer Milwaukee Bucks
 Which team drafted Scottie Pippin?
 answer Seattle SuperSonics
 Which team drafted Dennis Rodman?
@@ -297,8 +297,8 @@ answer Charlotte Hornets
 Which team drafted Lonzo Ball?
 answer Los Angles Lakers
 Which team lost in the eastern confernence finals against the Miami Heat in 2020?
-answer Milwuakee Bucks
-Which team lost in the eatern conference finals against the Miluwakee Bucks in 2021?
+answer Milwaukee Bucks
+Which team lost in the eastern  conference finals against the Miluwakee Bucks in 2021?
 answer Brooklyn Nets
 Which team lost in the eastern semi finals vs the Toronto Raptors in 2019?
 answer Philadelphia 76ers
@@ -332,7 +332,7 @@ answer Allen Iverson
 Which center won the DPOY 4 times in 5 consecutive seasons?
 answer Ben Wallace
 Which player won the MVP award in 2003?
-answer Tim duncan
+answer Tim Duncan
 Who won the 2021 finals MVP award?
 answer Giannis Antetokounmpo
 Which Slovenian guard won the Rookie of the Year in 2019?
@@ -351,10 +351,10 @@ What year did Kyrie Irving win Rookie of the Year?
 answer 2012
 Which San Antonio Spur player won back to back DPOY awards in 2015 and 2016?
 answer Kawhi Leonard
-Which Toronto Raptor foward won the MIP award in 2019?
+Which Toronto Raptor forward won the MIP award in 2019?
 answer Pascal Siakam
 Which player won back to back 6MOTY award in 2018 and 2019?
-answer Lou Williams
+answer Lou William
 Which Golden State Warrior won 2 straight finals MVP's in 2017 and 2018?
 answer Kevin Durant
 What year did Andre Igoudala win his finals MVP?
