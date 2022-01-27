@@ -1,5 +1,4 @@
 Wednesday:
--debugging (exit button after exiting info menu for instance)
 -protect against incorrect input (prevent incorrect inputs from crashing the program, henri has code for this from other projects)
 -integrate timer class with multiplayer mode
 -fix bug where timer somehow decreases playerScore size in singlePlayer
