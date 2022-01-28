@@ -308,10 +308,13 @@ infoMenu(playerScore,q,op,ans);
     }
 
     public static void insertionSort(ArrayList<Integer> numbers,ArrayList<String> names) throws IOException {
+        System.out.println("pre insertion sort");
+        System.out.println(numbers);
+        System.out.println(names);
         int j;
         for(int i=1; i<numbers.size();i++){
             j=i;
-            while(j>0 && numbers.get(j).compareTo(numbers.get(j-1))<0){
+            while(j>0 && numbers.get(j).compareTo(numbers.get(j-1))>0){
                 Collections.swap(numbers, j, j-1);
                 Collections.swap(names, j, j-1);
                 j--;
@@ -325,7 +328,9 @@ infoMenu(playerScore,q,op,ans);
             WriteFile.newLine();
         }
         WriteFile.close();
-
+        System.out.println("post insertion sort");
+        System.out.println(numbers);
+        System.out.println(names);
     }
     public static void culmReader(ArrayList<Integer> playerScore, ArrayList<String> q,ArrayList<String> op,ArrayList<String> ans, int n) throws FileNotFoundException, IOException {
         // import culmmenu.Culmmenu;
@@ -562,7 +567,7 @@ infoMenu(playerScore,q,op,ans);
     }
     //once the game is stopped, call highScore method? checkHighScore();
     public static void checkHighScore(ArrayList<Integer> playerScore) throws IOException {
-       System.out.println("acessing");
+       System.out.println("accessing");
         ArrayList<Integer> numbers = new ArrayList();
         ArrayList<String> names = new ArrayList();
 
@@ -576,6 +581,7 @@ infoMenu(playerScore,q,op,ans);
         br.close();
 System.out.println("Numbers: "+numbers);
         System.out.println("Names: "+names);
+        insertionSort(numbers,names);
 
         Scanner input = new Scanner(System.in);
         int winner = 0;
@@ -592,13 +598,13 @@ System.out.println("Numbers: "+numbers);
                 hi = playerScore.get(intC); winner=intC;
             }
         }
-System.out.println("Winner is: "+playerScore.get(winner));
+System.out.println("Winner is: "+(winner+1)+" with "+playerScore.get(winner));
         if (names.size()==5) { int max=numbers.get(0);
             int min=numbers.get(0);
             for(int intC=1; intC<numbers.size();intC++){
                 if(numbers.get(intC)>max){max=numbers.get(intC);}
                 if(numbers.get(intC)<min){min=numbers.get(intC);}
-                low=intC;}
+                low=intC;} System.out.println("low is: "+low);
             if(hi>low){names.remove(low); numbers.remove(low);
                 System.out.println("NEW HIGH SCORE!");
                 System.out.println("Enter your initials (first and last name only):");
@@ -614,7 +620,7 @@ System.out.println("Winner is: "+playerScore.get(winner));
         insertionSort(numbers,names);
         playerScore.remove(winner);
         if(playerScore.size()>1) {checkHighScore(playerScore);}
-
+else {menu(playerScore,q,op,ans,n,timeLimit);} //this work?
 
     }
 
