@@ -21,6 +21,7 @@ public class NbaTrivia {
     public static int gamemode1;
     public static int teamPlayer;
     public static int timeLimit;
+    public int c;
     Timer timer = new Timer();
     TimerTask task = new TimerTask() {
         public void run() {
@@ -28,6 +29,11 @@ public class NbaTrivia {
             //System.out.println("timeLimit is"+timeLimit);
             //   System.out.println("sP is: "+sP);
             if (sP>=timeLimit&&timeLimit!=-1) {System.out.println("TIMES UP");//Scanner may = new Scanner(System.in); for (int c=0; c<1; c++) {may.close();}//timer.cancel(); timer.purge();
+                try {
+                    checkHighScore(playerScore,c);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } //is this okay??
                 exitGame();
 
             } else if(timeLimit!=-1) {}
@@ -52,7 +58,7 @@ public class NbaTrivia {
         menu(playerScore,q,op,ans,n,timeLimit);       // menu(gamemode1,playerScore,teamPlayer,q,op,ans,n,timeLimit);
     }
     public static void menu(ArrayList<Integer>playerScore, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int n, int timeLimit) throws IOException {
-        int selected = 0;
+       // int selected = 0;
         System.out.println("Menu: (Enter the number of the option you wish to select)");
         System.out.println("1. Gamemodes");
         System.out.println("2. Settings");
@@ -61,13 +67,17 @@ public class NbaTrivia {
         System.out.println("5. Display high scores");
         System.out.println("6. Info (recommended for new players)");
         System.out.println("7. Exit");
-        Scanner s = new Scanner(System.in);
+      //  Scanner s = new Scanner(System.in);
 //note to henri: write thing to prevent invalid input
 
         // System.out.println("Picking menu");
-        String i = s.nextLine();
+
+       // String i = s.nextLine();
         // System.out.println("PickED menu");
-        selected = Integer.parseInt(i);
+       // selected = Integer.parseInt(i);
+        boolean Input = false;
+        int min = 0,max=8;
+     int selected =   getInput(Input,min,max);
         if (selected != 7) {
             if (selected == 1) {
                 gamemodes(playerScore,q,op,ans,n,timeLimit);
@@ -98,14 +108,17 @@ public class NbaTrivia {
     } //figure this out because its making u do an exit for  each back button, causing the back buttons to be a bit defunct
 
     public static void gamemodes(ArrayList<Integer> playerScore, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int n, int timeLimit) throws IOException {
-        int pick=0;
+       // int pick=0;
         //rn this is a defunct variable but if we decide to implement the team/player feature we'll use it
 //note that if we were to use it i'd to have to set it as a default like I did with gamemode1
-        Scanner input = new Scanner(System.in);
+       // Scanner input = new Scanner(System.in);
         System.out.println("1. Adjust mix of questions about teams and/or players");
         System.out.println("2. Adjust type of questions");
         System.out.println("3. Back to menu");
-        pick = input.nextInt();
+        boolean Input = false;
+        int min = 0,max=4;
+        int pick =   getInput(Input,min,max);
+    //    pick = input.nextInt();
         if (pick == 1) {teamsOrPlayers(playerScore,q,op,ans,n,timeLimit);}
 
 
@@ -117,14 +130,17 @@ public class NbaTrivia {
     }
 
     public static void teamsOrPlayers(ArrayList<Integer> playerScore, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int n, int timeLimit) throws IOException {
-        int pick2=0;
-        Scanner input = new Scanner(System.in);
+        //int pick2=0;
+        //Scanner input = new Scanner(System.in);
         System.out.println("1. Questions about players only");
         System.out.println("2. Questions about teams only");
         System.out.println("3. Randomized mix of both");
         System.out.println("4. Back to gamemodes menu");
         System.out.println("5. Back to main menu");
-        pick2 = input.nextInt();
+        boolean Input = false;
+        int min = 0,max=6;
+        int pick2 = getInput(Input,min,max);
+    //    pick2 = input.nextInt();
         if (pick2 == 1) {
             teamPlayer = 0;
             menu(playerScore, q, op, ans, n,timeLimit);
@@ -144,14 +160,17 @@ public class NbaTrivia {
 
     }
     public static void questionType(ArrayList<Integer> playerScore, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int n,int timeLimit) throws IOException {
-        int pick3=0;
-        Scanner input = new Scanner(System.in);
+       // int pick3=0;
+     //   Scanner input = new Scanner(System.in);
         System.out.println("1. Multiple choice questions only");
         System.out.println("2. Direct answer questions only");
         System.out.println("3. Randomized mix of both");
         System.out.println("4. Back to gamemodes menu");
         System.out.println("5. Back to main menu");
-        pick3 = input.nextInt();
+     //   pick3 = input.nextInt();
+        boolean Input = false;
+        int min = 0,max=6;
+        int pick3 = getInput(Input,min,max);
 //ignore these comments, they're for if we need to import a class
         //  import culmmenu.CulmReader;
         // CulmReader cr = new CulmReader();
@@ -177,13 +196,16 @@ public class NbaTrivia {
 
     }
     public static void settings(ArrayList<Integer> playerScore, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int n, int timeLimit) throws IOException {
-        int selected = 0;
-        Scanner input = new Scanner(System.in);
+       // int selected = 0;
+      //  Scanner input = new Scanner(System.in);
         System.out.println("1. Adjust time limit (or remove it)");
         System.out.println("2. Adjust number of players");
         System.out.println("3. Back to main menu");
 
-        selected = input.nextInt();
+        //selected = input.nextInt();
+        boolean Input = false;
+        int min = 0,max=4;
+        int selected = getInput(Input,min,max);
         if (selected==1) {timerSettings(playerScore,q,op,ans,n);}
 
 
@@ -194,27 +216,34 @@ public class NbaTrivia {
         if (selected==3) {menu(playerScore,q,op,ans,n,timeLimit);}
 
     }
-    public static void timerSettings(ArrayList<Integer> playerScore, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int n) throws IOException {int selected1=0;
+    public static void timerSettings(ArrayList<Integer> playerScore, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int n) throws IOException {
+        //int selected1=0;
         Scanner input = new Scanner(System.in);
         System.out.println("The current time limit is: ");
-        System.out.println("1. Change the Time Limit (or remove it)");
+        System.out.println("1. Change the time limit (or remove it)");
         System.out.println("2. Back to settings menu");
         System.out.println("3. Back to main menu");
-        selected1=input.nextInt();
-        if(selected1==1){System.out.println("enter the new timeLimit (enter -1 to remove timer)"); timeLimit=input.nextInt(); menu(playerScore,q,op,ans,n,timeLimit);}
+      //  selected1=input.nextInt();
+        boolean Input = false;
+        int min = 0,max=4;
+        int selected1 = getInput(Input,min,max);
+        if(selected1==1){System.out.println("Enter the new time limit in seconds (enter -1 to remove timer)"); timeLimit=input.nextInt(); menu(playerScore,q,op,ans,n,timeLimit);}
         if (selected1==2) {settings(playerScore,q,op,ans,n,timeLimit);}
         if (selected1==3) {menu(playerScore,q,op,ans,n,timeLimit);}
     }
 
     public static void playerNumbers(ArrayList<Integer> playerScore, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans, int n, int timeLimit) throws IOException {System.out.println("Current number of players is: "+playerScore.size());
         Scanner input = new Scanner(System.in);
-        int selected1=0;
+        //int selected1=0;
         System.out.println("1. Remove players");
         System.out.println("2. Add players");
         System.out.println("3. Back to settings menu");
         System.out.println("4. Back to main menu");
 
-        selected1=input.nextInt();
+       // selected1=input.nextInt();
+        boolean Input = false;
+        int min = 0,max=5;
+        int selected1 = getInput(Input,min,max);
         if (selected1==1) {
             System.out.println("Enter the players you wish to remove (enter d to stop removing players)");
             boolean done = false;
@@ -223,12 +252,12 @@ public class NbaTrivia {
             }}
         }
         if (selected1==2) {System.out.println("Enter how many players you wish to add"); //check if the math checks out here
-            int size = playerScore.size();
-            int i = 0;
-            i = input.nextInt();
+           // int size = playerScore.size();
+            int i  = input.nextInt();
+            //i+=1;
             for (int c=0; c<i; c++) {
-                playerScore.add(0); menu(playerScore,q,op,ans,n,timeLimit);}
-        }
+                playerScore.add(0);
+        }menu(playerScore,q,op,ans,n,timeLimit);}
         if (selected1==3) {settings(playerScore,q,op,ans,n,timeLimit);}
         if (selected1==4) {menu(playerScore,q,op,ans,n,timeLimit);}
     }
@@ -243,10 +272,11 @@ public class NbaTrivia {
         //code that displays highscores, we still need one that records it either in a connected method to playGame, or playGame itself
         ArrayList<Integer> numbers = new ArrayList();
         ArrayList<String> names = new ArrayList();
+        System.out.println("HIGHSCORES:");
         BufferedReader d = new BufferedReader(new FileReader("highscores.txt"));
         String dLine;
         while ((dLine = d.readLine()) != null) {
-            numbers.add(Integer.parseInt(dLine.substring(dLine.indexOf(" ")+1)));
+            numbers.add(Integer.parseInt(dLine.substring(dLine.indexOf(" ")+1))); //fix this too
             names.add(dLine.substring(0,dLine.indexOf(":")));
         }
         d.close();
@@ -261,12 +291,13 @@ public class NbaTrivia {
             System.out.println(Line);
         }
         br.close();
+        System.out.println("---------------------------------------------------------------");
         menu(playerScore,q,op,ans,n,timeLimit);
     }
 
     public static void infoMenu(ArrayList<Integer> playerScore, ArrayList<String> q, ArrayList<String> op, ArrayList<String> ans) throws IOException {
-        int select;
-        Scanner input = new Scanner(System.in);
+       // int select;
+        //Scanner input = new Scanner(System.in);
         System.out.println("Welcome to the Info Menu");
         System.out.println("1. How to start.");
         System.out.println("2. How to change settings.");
@@ -275,7 +306,9 @@ public class NbaTrivia {
         System.out.println("5. Exiting the game.");
         System.out.println("6. Exit Info Menu.");
 
-        select = input.nextInt();
+        boolean Input = false;
+        int min = 0,max=7;
+        int select = getInput(Input,min,max);
         if (select == 1) {
             System.out.println("How to start:");
             System.out.println("- First, select the gamemode you wish to play in the \"Gamemodes\" tab. 1 player or 2 players. ");
@@ -308,9 +341,9 @@ infoMenu(playerScore,q,op,ans);
     }
 
     public static void insertionSort(ArrayList<Integer> numbers,ArrayList<String> names) throws IOException {
-        System.out.println("pre insertion sort");
-        System.out.println(numbers);
-        System.out.println(names);
+       // System.out.println("pre insertion sort");
+      //  System.out.println(numbers);
+       // System.out.println(names);
         int j;
         for(int i=1; i<numbers.size();i++){
             j=i;
@@ -328,9 +361,9 @@ infoMenu(playerScore,q,op,ans);
             WriteFile.newLine();
         }
         WriteFile.close();
-        System.out.println("post insertion sort");
-        System.out.println(numbers);
-        System.out.println(names);
+      //  System.out.println("post insertion sort");
+       // System.out.println(numbers);
+      //  System.out.println(names);
     }
     public static void culmReader(ArrayList<Integer> playerScore, ArrayList<String> q,ArrayList<String> op,ArrayList<String> ans, int n) throws FileNotFoundException, IOException {
         // import culmmenu.Culmmenu;
@@ -464,7 +497,7 @@ infoMenu(playerScore,q,op,ans);
 */
 
 
-
+int c=0;
 
 
 //int d==;
@@ -472,6 +505,7 @@ infoMenu(playerScore,q,op,ans);
         int   points =1;
         int players = playerScore.size();
         String tem = "";
+        int exit=0;
       /* boolean safe = false;
         while (!safe) {
         if (runs>0) {Scanner input = new Scanner(System.in); input.close();}
@@ -514,7 +548,8 @@ infoMenu(playerScore,q,op,ans);
             }
             else if(tem.equals("ENDGAME")) {
                 //exitGame();
-                checkHighScore(playerScore);
+                checkHighScore(playerScore,c);
+                exit=0;
             }
             else {System.out.println("Incorrect!"); System.out.println("The answer was: "+ans.get(num));}
             if (points==1) {playGame(n,q,op,ans,playerScore,co);}
@@ -552,8 +587,8 @@ infoMenu(playerScore,q,op,ans);
                 playerScore.set(n,points+playerScore.get(n));
             }
             else if(tem.equals("ENDGAME")) {
-                input.close();
-                checkHighScore(playerScore);
+              //  input.close();
+                checkHighScore(playerScore,c);
             }
             else {System.out.println("Incorrect!"); System.out.println("The answer was: "+ans.get(num));}
              System.out.println("Player "+(n+1)+" 's score is: "+playerScore.get(n)); if (points==1) {playGame(n,q,op,ans,playerScore,co);}
@@ -563,11 +598,12 @@ infoMenu(playerScore,q,op,ans);
             //for (int i = 0; i<playerScore.size(); i++) {if (playerScore.get(i)>playerScore.get(hi)) {hi=i;}}
            // System.out.println("Player "+hi+1+" wins with a final score of "+playerScore.get(hi)+"!");
         }
-//checkHighScore(playerScore);
+
     }
-    //once the game is stopped, call highScore method? checkHighScore();
-    public static void checkHighScore(ArrayList<Integer> playerScore) throws IOException {
-       System.out.println("accessing");
+    public static void checkHighScore(ArrayList<Integer> playerScore, int c) throws IOException {
+     //  System.out.println("accessing");
+
+
         ArrayList<Integer> numbers = new ArrayList();
         ArrayList<String> names = new ArrayList();
 
@@ -575,12 +611,12 @@ infoMenu(playerScore,q,op,ans);
         String Line;
 
         while((Line=br.readLine())!=null){
-            numbers.add(Integer.parseInt(Line.substring(Line.indexOf(" ")+1)));
+            numbers.add(Integer.parseInt(Line.substring(Line.indexOf(" ")+1))); //fix this or something idk
             names.add(Line.substring(0,Line.indexOf(":")));
         }
         br.close();
-System.out.println("Numbers: "+numbers);
-        System.out.println("Names: "+names);
+//System.out.println("Numbers: "+numbers);
+     //   System.out.println("Names: "+names);
         insertionSort(numbers,names);
 
         Scanner input = new Scanner(System.in);
@@ -598,16 +634,17 @@ System.out.println("Numbers: "+numbers);
                 hi = playerScore.get(intC); winner=intC;
             }
         }
-System.out.println("Winner is: "+(winner+1)+" with "+playerScore.get(winner));
+ if(c==0) {System.out.println("Winner is: Player "+(winner+1)+" with "+playerScore.get(winner));} //figure out how to only print this once yk
         if (names.size()==5) { int max=numbers.get(0);
             int min=numbers.get(0);
             for(int intC=1; intC<numbers.size();intC++){
                 if(numbers.get(intC)>max){max=numbers.get(intC);}
                 if(numbers.get(intC)<min){min=numbers.get(intC);}
-                low=intC;} System.out.println("low is: "+low);
-            if(hi>low){names.remove(low); numbers.remove(low);
+                low=intC;} //System.out.println("low is: "+low);
+            if(hi>min){names.remove(low); numbers.remove(low);
                 System.out.println("NEW HIGH SCORE!");
-                System.out.println("Enter your initials (first and last name only):");
+               // System.out.println("size is: "+playerScore.size());
+                System.out.println("Player "+(winner+1)+" enter your initials (first and last name only):");
                 String temp = input.nextLine();
                 //write thing here to prevent it from being more than two lines yk
                 names.add(temp); numbers.add(playerScore.get(winner));
@@ -619,12 +656,25 @@ System.out.println("Winner is: "+(winner+1)+" with "+playerScore.get(winner));
             names.add(temp); numbers.add(playerScore.get(winner));}
         insertionSort(numbers,names);
         playerScore.remove(winner);
-        if(playerScore.size()>1) {checkHighScore(playerScore);}
+        if(playerScore.size()>=1) {c++; checkHighScore(playerScore,c);}
 else {menu(playerScore,q,op,ans,n,timeLimit);} //this work?
 
     }
 
+    public static int getInput (boolean Input,int min,int max) {
+        Scanner input = new Scanner(System.in);
+        int t2;
+        while(!Input) {
+            try  {
+                t2 = input.nextInt();
+                if (t2>min&&t2<max) {
+                    return(t2);
 
+                }
+                else{System.out.println("Error: you must enter only one of the numbers listed above. Try again: ");}
+
+            }  catch (Exception e) {System.out.print("\nError: you must enter an integer. Try again. "); input.next();} }
+        return(0);}
 
 }
 
