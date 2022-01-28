@@ -7,6 +7,7 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Collections;
+import java.util.InputMismatchException;
 
 
 
@@ -248,7 +249,7 @@ public class NbaTrivia {
             System.out.println("Enter the players you wish to remove (enter d to stop removing players)");
             boolean done = false;
             while (!done) {int i; String temp=input.next(); if (temp.equals("done")){done=true; break;} else{
-                i=Integer.parseInt(temp); playerScore.remove(i+1);
+                i=Integer.parseInt(temp); playerScore.remove(i-1);
             }}
         }
         if (selected1==2) {System.out.println("Enter how many players you wish to add"); //check if the math checks out here
@@ -673,7 +674,7 @@ else {menu(playerScore,q,op,ans,n,timeLimit);} //this work?
                 }
                 else{System.out.println("Error: you must enter only one of the numbers listed above. Try again: ");}
 
-            }  catch (Exception e) {System.out.print("\nError: you must enter an integer. Try again. "); input.next();} }
+            }  catch (InputMismatchException e) {System.out.print("\nError: you must enter an integer. Try again: "); input.next();} }
         return(0);}
 
 }
